@@ -24,8 +24,8 @@ public class Vector {
 	 */
 	public Vector(double x,double y)
 	{
-		this.x= x; 
-		this.y=y;
+		this.x = x; 
+		this.y = y;
 	}
 	
 	/**
@@ -45,8 +45,8 @@ public class Vector {
 	 */
 	public void sub(Vector v)
 	{
-		this.x-= v.getX();
-		this.y-= v.getY();
+		this.x -= v.getX();
+		this.y -= v.getY();
 	}
 	
 	/**
@@ -56,7 +56,7 @@ public class Vector {
 	 */
 	public Vector mul(double s)
 	{
-		return new Vector(this.x*s,this.y*s);
+		return new Vector(this.x * s,this.y * s);
 	}
 	/**
 	 * Divides this Vector with a Scalar 
@@ -65,7 +65,7 @@ public class Vector {
 	 */
 	public Vector div(double s)
 	{
-		return new Vector(this.x*s,this.y*s);
+		return new Vector(this.x / s,this.y / s);
 	}
 	
 	/**
