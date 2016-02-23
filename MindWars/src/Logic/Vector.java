@@ -41,12 +41,12 @@ public class Vector {
 	/**
 	 * Subtracts a Vector to this Vector
 	 * @param v Vector to subtract
+	 * @return 
 	 * @return new Vector
 	 */
-	public void sub(Vector v)
+	public Vector sub(Vector v)
 	{
-		this.x -= v.getX();
-		this.y -= v.getY();
+		return new Vector(this.x + v.getX(), this.y + v.getY());
 	}
 	
 	/**
