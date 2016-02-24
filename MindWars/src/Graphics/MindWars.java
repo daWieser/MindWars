@@ -10,10 +10,8 @@ public class MindWars extends JFrame {
 	private GameGraphics gameGraphics;
 	private GameCalculation gameCalculation;
 
-	public static void main(String[] args) {
-		new MindWars();
-	}
-	
+
+
 	public MindWars(){
 		this.setTitle("Milli sux dix");
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -24,6 +22,34 @@ public class MindWars extends JFrame {
 		this.setUndecorated(true);
 		
 		this.setVisible(true);
+	}
+	
+	/**
+	 * Sets the Frame to menu
+	 */	
+	public void toMenue()
+	{
+		this.setContentPane(menu);
+	}
+	
+	public static void main(String[] args) {
+		new MindWars();
+	}
+	
+	public GameGraphics getGameGraphics() {
+		return gameGraphics;
+	}
+
+	public void setGameGraphics(GameGraphics gameGraphics) {
+		this.gameGraphics = gameGraphics;
+	}
+
+	public GameCalculation getGameCalculation() {
+		return gameCalculation;
+	}
+
+	public void setGameCalculation(GameCalculation gameCalculation) {
+		this.gameCalculation = gameCalculation;
 	}
 
 }

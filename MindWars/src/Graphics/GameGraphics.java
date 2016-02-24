@@ -1,5 +1,7 @@
 package Graphics;
 
-public class GameGraphics {
+import javax.swing.JPanel;
+
+public class GameGraphics extends JPanel{
 
 }
