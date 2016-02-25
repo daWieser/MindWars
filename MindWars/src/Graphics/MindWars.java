@@ -9,7 +9,7 @@ public class MindWars extends JFrame {
 	private Menu menu;
 	private GameGraphics gameGraphics;
 	private GameCalculation gameCalculation;
-
+	private Settings settings;
 
 
 	public MindWars(){
@@ -24,6 +24,7 @@ public class MindWars extends JFrame {
 		this.setVisible(true);
 	}
 	
+
 	/**
 	 * Sets the Frame to menu
 	 */	
@@ -32,6 +33,13 @@ public class MindWars extends JFrame {
 		this.setContentPane(menu);
 	}
 	
+	public Settings getSettings() {
+		return settings;
+	}
+
+	public void setSettings(Settings settings) {
+		this.settings = settings;
+	}	
 	public static void main(String[] args) {
 		new MindWars();
 	}

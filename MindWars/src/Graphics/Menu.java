@@ -69,8 +69,13 @@ public class Menu extends JPanel implements ActionListener{
 		}
 		if(arg0.getSource()==this.settings)
 		{
+			Settings s = new Settings(this.mindWars);
+			this.mindWars.setSettings(s);
 			
-			
+			this.mindWars.getContentPane().removeAll();
+			this.mindWars.getContentPane().add(s);
+			this.mindWars.setContentPane(s);
+		
 		}
 		if(arg0.getSource()==this.exit)
 		{
