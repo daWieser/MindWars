@@ -21,7 +21,12 @@ public class Map {
 		hitbox.add(new rect(new Vector(500,100), new Vector(100,100)));
 	}
 	
-	public void checkHitbox (Vector pos){
-		
+	public boolean checkHitbox (Vector pos, Vector dim){
+		for (int i=0;i<hitbox.size();i++){
+			if (pos.getX()+dim.getX()>hitbox.get(i).position.getX()){
+				return true;
+			}
+		}
+		return false;
 	}
 }
