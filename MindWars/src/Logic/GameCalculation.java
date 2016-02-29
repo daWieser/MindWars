@@ -50,8 +50,7 @@ public class GameCalculation implements Runnable{
 		p1.setPosition(e.getPosition());
 		p1.setMovement(e.getMovement());
 	}
-
-
+	
 	public void changeCharacterMovement(Vector change)
 	{
 		this.p1.setMovement(this.p1.getMovement().add(change));
@@ -66,5 +65,4 @@ public class GameCalculation implements Runnable{
 	{
 		//TODO: Stop Character Movement
 	}
-
 }
