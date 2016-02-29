@@ -9,21 +9,29 @@ import javax.swing.JPanel;
 
 public class Settings extends JPanel implements ActionListener{
 
-	JButton fullScreen;
+	JButton button_FullScreen;
 	
 	MindWars mindWars;
+	
+	private boolean fullScreen= true;
+	private int windowHeight = 1080;
+	private int windowWidth = 1920;
+	private int volume = 100;
+	
+	
 	
 	Settings(MindWars m)
 	{
 		this.mindWars=m;
+
 		
 		this.setLayout(null);
+		this.setSize(500,500);
+
+		this.button_FullScreen=new JButton("d");
+		this.button_FullScreen.setBounds(200, 200, 100, 100);
+		this.add(this.button_FullScreen);
 		
-		this.fullScreen=new JButton("d");
-		this.fullScreen.setBounds(200, 200, 100, 100);
-		this.add(this.fullScreen);
-		
-		this.mindWars.validate();
 		this.mindWars.setVisible(true);
 		
 	}

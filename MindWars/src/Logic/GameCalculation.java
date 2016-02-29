@@ -10,6 +10,7 @@ public class GameCalculation implements Runnable{
 	private Character p1;
 	private boolean flag;
 	private ArrayList<Entity> entities;
+
 	private Map map;
 	
 	public ArrayList<Entity> getEntities() {
