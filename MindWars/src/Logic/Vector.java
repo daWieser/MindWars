@@ -73,11 +73,31 @@ public class Vector {
 	 * @param deg  angle in degree
 	 * @return new Vector
 	 */
-	public Vector turn(float deg)
+	public Vector turn(double deg)
 	{
 		return new Vector(this.x*Math.sin(deg*Math.PI/180),this.y*Math.cos(deg*Math.PI/180));
 	}
 	
+	public double getAngle(){
+		double a = 0;
+		if(this.getX() == this.getY() && this.getX() == 0){
+			return 0;
+		}
+		
+		if(this.getX() != 0){
+			a = Math.atan(this.getY()/this.getX())*180/Math.PI;
+		}
+		else {
+			if(y > 0) a = 90;
+			else a = 270;
+		}
+		
+		if(x < 0) a += 180;
+		if(a < 0) a += 360;
+		a = a%360;
+		
+		return a;
+	}
 	
 	public double getX() {
 		return x;
