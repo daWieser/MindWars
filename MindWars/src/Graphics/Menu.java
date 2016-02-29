@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import Logic.GameCalculation;
+import Logic.Map;
 import Logic.Vector;
 
 
@@ -54,8 +55,9 @@ public class Menu extends JPanel implements ActionListener{
 		if(arg0.getSource()==this.play)
 		{
 			
-			GameGraphics gr= new GameGraphics(); 
-			GameCalculation gc = new GameCalculation();
+			GameGraphics gr= new GameGraphics();
+			Map map = new Map("");
+			GameCalculation gc = new GameCalculation(map);
 			
 			this.mindWars.setContentPane(gr);
 			this.mindWars.setGameGraphics(gr);

@@ -14,7 +14,11 @@ public class Map {
 		}
 	}
 	
-	public Map (){
+	private Vector a_gravitation;
+	
+	public Map (String name){
+		
+		
 		hitbox = new ArrayList<rect>();
 		
 		//test
@@ -49,4 +53,10 @@ public class Map {
 		}
 		return false;
 	}
+	
+	public void readMap(String name){
+		a_gravitation = new Vector(0,1);
+		hitbox.add(new rect(new Vector(500,100), new Vector(100,100)));
+	}
+	
 }

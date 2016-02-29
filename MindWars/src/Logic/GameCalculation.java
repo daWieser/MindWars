@@ -18,10 +18,10 @@ public class GameCalculation implements Runnable{
 	public void setEntities(ArrayList<Entity> entities) {
 		this.entities = entities;
 	}
-	public GameCalculation (){
+	public GameCalculation (Map map){
 		p1 = new Character(new Vector (5,0));
 		flag = true;
-		map = new Map();
+		this.map = map;
 		
 		Thread t = new Thread(this);
 		t.start();
