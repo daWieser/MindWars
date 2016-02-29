@@ -11,8 +11,8 @@ public class Character extends Entity{
 	private BufferedImage body;
 	
 	public Character (Vector pos){
-		super(pos, new Vector(0,0));
-		
+		super(pos, new Vector(0,0), new Vector(50,100));
+		//Load images
 	}
 	
 	@Override

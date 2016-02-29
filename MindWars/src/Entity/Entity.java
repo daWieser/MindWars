@@ -9,7 +9,7 @@ public abstract class Entity {
 	protected Vector movement;
 	protected Vector dimension;
 	
-	public enum action { CONTINUE, STOP}
+	
 	
 	
 	
@@ -37,14 +37,20 @@ public abstract class Entity {
 		this.dimension = new Vector(dim);
 	}
 
-	public Entity (Vector pos, Vector mov){
+	public Entity (Vector pos, Vector mov, Vector dim){
 		this.position = new Vector(pos);
 		this.movement = new Vector(mov);
-		this.dimension = new Vector(50,100);
+		this.dimension = new Vector(dim);
 	}
 	
 	public abstract void draw(Graphics g);
 	
+	/**
+	 * 
+	 * @param id: Hitbox Type
+	 * @return  0: Stop
+	 * 			1: Continue
+	 */
 	public abstract int hitBox(int id);
 	
 }
