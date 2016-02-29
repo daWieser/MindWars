@@ -31,7 +31,13 @@ public class GameCalculation implements Runnable{
 	public void run() {
 		while (flag){
 			Character p1t = new Character(p1.getPosition().add(p1.getMovement()));
-			
+			if (map.checkHitbox(p1t.getPosition(), p1t.getDimension())){
+				if (p1t.hitBox(0)==0){
+					
+				}
+			} else {
+				p1.setPosition(p1t.getPosition());
+			}
 		}		
 	}
 
