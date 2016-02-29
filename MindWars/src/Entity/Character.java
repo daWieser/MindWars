@@ -21,4 +21,10 @@ public class Character extends Entity{
 		
 	}
 
+	@Override
+	public int hitBox(int id) {
+		
+		return 0;
+	}
+
 }
