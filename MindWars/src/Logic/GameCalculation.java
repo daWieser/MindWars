@@ -41,5 +41,19 @@ public class GameCalculation implements Runnable{
 			}
 		}		
 	}
-
+	
+	public void changeCharacterMovement(Vector change)
+	{
+		this.p1.setMovement(this.p1.getMovement().add(change));
+	}
+	
+	public void characterJump()
+	{
+		//TODO: implement  Jump 
+	}
+	
+	public void stopCharactermovement(int m)
+	{
+		//TODO: Stop Character Movement
+	}
 }
