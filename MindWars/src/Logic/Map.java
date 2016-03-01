@@ -70,16 +70,22 @@ public class Map {
 				double diff = htop-ebottom;
 				e.getPosition().add(new Vector(0, diff));
 				e.hitBox(2);
+				i--;
+				continue;
 			}
 			if(!(hleft > eright)){ //collision right of entity
 				double diff = eright-hleft;
 				e.getPosition().add(new Vector(diff, 0));
 				e.hitBox(3);
+				i--;
+				continue;
 			}
 			if(!(hbottom > etop)){ //collision bottom of entity
 				double diff = hbottom-etop;
 				e.getPosition().add(new Vector(0, diff));
 				e.hitBox(4);
+				i--;
+				continue;
 			}
 		}
 		return e;
