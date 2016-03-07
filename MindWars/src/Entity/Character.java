@@ -22,7 +22,7 @@ public class Character extends Entity{
 		this.setFallVelocity(new Vector(1,1));
 		this.setJumpVelocity(new Vector(0, 70));
 		try {
-			ImageIO.read(new File("resources/character_01"));
+			body = ImageIO.read(new File("resources/character_01"));
 		} catch (IOException e) {
 			System.out.println("Character loading Error");
 		}
