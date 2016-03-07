@@ -144,7 +144,7 @@ public class Vector {
 
 	public Vector mul(Vector vector) {
 		
-		return Vector(this.getX()*vector.getX(),this.getY()*this.getY());
+		return new Vector(this.getX()*vector.getX(),this.getY()*this.getY());
 	}
 	
 }
