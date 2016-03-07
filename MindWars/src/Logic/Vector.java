@@ -141,5 +141,10 @@ public class Vector {
 			return false;
 		return true;
 	}
+
+	public Vector mul(Vector vector) {
+		
+		return new Vector(this.getX()*vector.getX(),this.getY()*this.getY());
+	}
 	
 }

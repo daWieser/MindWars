@@ -10,14 +10,12 @@ public class MindWars extends JFrame {
 	private GameGraphics gameGraphics;
 	private GameCalculation gameCalculation;
 	private Settings settings;
-	public static Vector resolution;
-
+	private Input input;
 
 	public MindWars(){
 		this.setTitle("Milli sux dix");
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		
-		resolution = new Vector(this.getWidth(),this.getHeight());
 		
 		menu = new Menu(this);
 		this.setContentPane(menu);
@@ -26,7 +24,6 @@ public class MindWars extends JFrame {
 		this.setVisible(true);
 	}
 	
-
 
 	/**
 	 * Sets the Frame to menu
@@ -62,5 +59,15 @@ public class MindWars extends JFrame {
 	public void setGameCalculation(GameCalculation gameCalculation) {
 		this.gameCalculation = gameCalculation;
 	}
+	public Input getInput() {
+		return input;
+	}
+
+
+	public void setInput(Input input) {
+		this.input = input;
+	}
+
+
 
 }
