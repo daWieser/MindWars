@@ -10,7 +10,7 @@ public class MindWars extends JFrame {
 	private GameGraphics gameGraphics;
 	private GameCalculation gameCalculation;
 	private Settings settings;
-
+	private Input input;
 
 	public MindWars(){
 		this.setTitle("Milli sux dix");
@@ -58,6 +58,14 @@ public class MindWars extends JFrame {
 
 	public void setGameCalculation(GameCalculation gameCalculation) {
 		this.gameCalculation = gameCalculation;
+	}
+	public Input getInput() {
+		return input;
+	}
+
+
+	public void setInput(Input input) {
+		this.input = input;
 	}
 
 }

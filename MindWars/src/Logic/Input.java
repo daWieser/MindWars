@@ -4,10 +4,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import Graphics.Settings;
 
-public class Input implements KeyListener,MouseListener{
+public class Input implements KeyListener,MouseListener, MouseMotionListener{
 	
 	private Settings settings;
 	private GameCalculation gameCalc;
@@ -24,11 +25,11 @@ public class Input implements KeyListener,MouseListener{
 		// TODO Auto-generated method stub
 		if(arg0.getKeyCode()==settings.getKeyMoveLeft())
 		{
-			this.gameCalc.changeCharacterMovement(new Vector(2,0));
+			this.gameCalc.changeCharacterMovement(new Vector(1,0));
 		}
 		if(arg0.getKeyCode()==settings.getKeyMoveRight())
 		{
-			this.gameCalc.changeCharacterMovement(new Vector(-2,0));
+			this.gameCalc.changeCharacterMovement(new Vector(-1,0));
 
 		}
 		if(arg0.getKeyCode()==settings.getKeyJump())
@@ -62,6 +63,8 @@ public class Input implements KeyListener,MouseListener{
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	
+		
 	}
 
 	@Override
@@ -86,6 +89,18 @@ public class Input implements KeyListener,MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
