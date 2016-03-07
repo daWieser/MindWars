@@ -2,6 +2,10 @@ package Entity;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import Logic.Vector;
 
@@ -12,13 +16,16 @@ public class Character extends Entity{
 	
 	public Character (Vector pos){
 		super(pos, new Vector(0,0), new Vector(50,100));
-		//Load images
+		try {
+			ImageIO.read(new File("resources/character_01"));
+		} catch (IOException e) {
+			System.out.println("Character loading Error");
+		}
 	}
 	
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		g.drawImage(body, (int)position.getX(), (int)(position.getY()+dimension.getY()), (int)(dimension.getX() + dimension.getY()), 0, null);
 	}
 
 	@Override
