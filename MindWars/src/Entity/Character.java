@@ -14,8 +14,13 @@ public class Character extends Entity{
 	private BufferedImage head;
 	private BufferedImage body;
 	
+	private Vector jumpVelocity;
+	
 	public Character (Vector pos){
 		super(pos, new Vector(0,0), new Vector(50,100));
+		
+		this.setFallVelocity(new Vector(1,1));
+		this.setJumpVelocity(new Vector(0, 70));
 		try {
 			ImageIO.read(new File("resources/character_01"));
 		} catch (IOException e) {
@@ -38,5 +43,15 @@ public class Character extends Entity{
 		}
 		return 0;
 	}
+
+	public Vector getJumpVelocity() {
+		return jumpVelocity;
+	}
+
+	public void setJumpVelocity(Vector jumpVelocity) {
+		this.jumpVelocity = jumpVelocity;
+	}
+	
+	
 
 }
