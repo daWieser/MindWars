@@ -8,13 +8,14 @@ import javax.swing.JPanel;
 
 import Entity.Entity;
 import Logic.GameCalculation;
+import Logic.Input;
 
 public class GameGraphics extends JPanel{
 	
 	private GameCalculation gameCalc; 
 	private ArrayList<Entity> entities;
 	
-	
+
 	GameGraphics(GameCalculation gameCalc)
 	{
 		this.gameCalc=gameCalc;
@@ -24,7 +25,9 @@ public class GameGraphics extends JPanel{
 		
 		this.setBackground(Color.BLACK);
 		
+		
 		this.setVisible(true);
+	
 		
 	}
 	
