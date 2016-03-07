@@ -9,6 +9,8 @@ public class Projectile extends Entity{
 
 	public Projectile(Vector pos, Vector mov) {
 		super(pos, mov, new Vector(10, 10));
+		
+		this.setFallVelocity(new Vector(0,0));
 		// TODO Auto-generated constructor stub
 	}
 

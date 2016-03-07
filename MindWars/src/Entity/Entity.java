@@ -9,6 +9,7 @@ public abstract class Entity {
 	protected Vector movement;
 	protected Vector dimension;
 	
+	private Vector fallVelocity;
 	
 	
 	
@@ -52,5 +53,17 @@ public abstract class Entity {
 	 * 			1: Continue
 	 */
 	public abstract int hitBox(int id);
+	
+	
+	
+	public Vector getFallVelocity() {
+		return fallVelocity;
+	}
+
+	public void setFallVelocity(Vector fallVelocity) {
+		this.fallVelocity = fallVelocity;
+	}
+
+	
 	
 }
