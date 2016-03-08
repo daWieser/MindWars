@@ -64,6 +64,11 @@ public abstract class Entity {
 		this.fallVelocity = fallVelocity;
 	}
 
+	public void draw(Graphics g, Vector resrelation) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }

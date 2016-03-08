@@ -23,6 +23,14 @@ public class Map {
 	private Vector a_inertia;
 	private BufferedImage mappic;
 	
+	public BufferedImage getMappic() {
+		return mappic;
+	}
+
+	public void setMappic(BufferedImage mappic) {
+		this.mappic = mappic;
+	}
+
 	public Map (String name){
 		
 		
