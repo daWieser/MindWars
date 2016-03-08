@@ -22,15 +22,15 @@ public class Character extends Entity{
 		this.setFallVelocity(new Vector(1,1));
 		this.setJumpVelocity(new Vector(0, 70));
 		try {
-			ImageIO.read(new File("resources/character_01"));
+			body = ImageIO.read(new File("resources/character_01"));
 		} catch (IOException e) {
 			System.out.println("Character loading Error");
 		}
 	}
 	
 	@Override
-	public void draw(Graphics g) {
-		g.drawImage(body, (int)position.getX(), (int)(position.getY()+dimension.getY()), (int)(dimension.getX() + dimension.getY()), 0, null);
+	public void draw(Graphics g, Vector resrelation) {
+		g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY())*resrelation.getY()), (int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
 	}
 
 	@Override
@@ -50,6 +50,12 @@ public class Character extends Entity{
 
 	public void setJumpVelocity(Vector jumpVelocity) {
 		this.jumpVelocity = jumpVelocity;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

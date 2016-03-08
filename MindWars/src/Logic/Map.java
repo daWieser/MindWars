@@ -1,7 +1,10 @@
 package Logic;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import Entity.Entity;
 
@@ -18,12 +21,25 @@ public class Map {
 	
 	private Vector a_gravitation;
 	private Vector a_inertia;
+	private BufferedImage mappic;
 	
+	public BufferedImage getMappic() {
+		return mappic;
+	}
+
+	public void setMappic(BufferedImage mappic) {
+		this.mappic = mappic;
+	}
+
 	public Map (String name){
 		
 		
 		hitbox = new ArrayList<rect>();
-		
+		try {
+			mappic=ImageIO.read (new File("ressources/map_01.png"));
+		} catch (IOException e) {
+			System.out.println("Map load error");
+		}
 		//test
 		hitbox.add(new rect(new Vector(500,100), new Vector(100,100)));
 	}

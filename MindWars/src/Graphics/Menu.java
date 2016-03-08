@@ -56,7 +56,7 @@ public class Menu extends JPanel implements ActionListener{
 		{
 
 			GameCalculation gc= new GameCalculation(new Map(""));
-			GameGraphics gr= new GameGraphics(gc); 
+			GameGraphics gr= new GameGraphics(gc,mindWars); 
 			
 			this.mindWars.setContentPane(gr);
 			this.mindWars.setGameGraphics(gr);
