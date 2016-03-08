@@ -51,6 +51,12 @@ public class Character extends Entity{
 	public void setJumpVelocity(Vector jumpVelocity) {
 		this.jumpVelocity = jumpVelocity;
 	}
+
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 
