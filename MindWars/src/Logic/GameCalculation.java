@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import Entity.Character;
 import Entity.Entity;
+import Graphics.Settings;
 
 
 public class GameCalculation implements Runnable{
 	private Character p1;
 	private boolean flag;
 	private ArrayList<Entity> entities;
+	private Settings settings;
 
 	private Map map;
 	
@@ -19,10 +21,12 @@ public class GameCalculation implements Runnable{
 	public void setEntities(ArrayList<Entity> entities) {
 		this.entities = entities;
 	}
-	public GameCalculation (Map map){
+	public GameCalculation (Map map, Settings settings){
 		p1 = new Character(new Vector (5,0));
 		flag = true;
 		this.map = map;
+		
+		this.settings=settings;
 		
 		Thread t = new Thread(this);
 		t.start();

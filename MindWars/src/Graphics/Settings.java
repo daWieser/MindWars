@@ -24,16 +24,29 @@ public class Settings extends JPanel implements ActionListener{
 	private int key_moveRight= KeyEvent.VK_D;
 	private int key_jump= KeyEvent.VK_W;
 	
+	private int ticks;
 	
 	
 	
-	Settings(MindWars m)
+	
+	public int getTicks() {
+		return ticks;
+	}
+
+	public void setTicks(int ticks) {
+		this.ticks = ticks;
+	}
+
+	public Settings(MindWars m)
 	{
 		this.mindWars=m;
 
 		
 		this.setLayout(null);
 		this.setSize(500,500);
+		
+		this.ticks = 30;
+		//Times a Frame refreshes in one second
 
 		this.button_FullScreen=new JButton("d");
 		this.button_FullScreen.setBounds(200, 200, 100, 100);

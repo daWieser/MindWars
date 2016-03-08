@@ -16,7 +16,6 @@ public class Menu extends JPanel implements ActionListener{
 	private JButton levelEditor;
 	private JButton settings;
 	private JButton exit;
-	
 	private MindWars mindWars;
 	
 	public Menu (MindWars mindWars){
@@ -24,6 +23,8 @@ public class Menu extends JPanel implements ActionListener{
 		this.mindWars=mindWars;
 		
 		this.setLayout(null);
+		
+		
 		
 		this.play = new JButton("play");
 		this.play.setBounds(0,0,100,100);
@@ -55,7 +56,7 @@ public class Menu extends JPanel implements ActionListener{
 		if(arg0.getSource()==this.play)
 		{
 
-			GameCalculation gc= new GameCalculation(new Map(""));
+			GameCalculation gc= new GameCalculation(new Map(""), this.mindWars.getSettings() );
 			GameGraphics gr= new GameGraphics(gc,mindWars); 
 			
 			this.mindWars.setContentPane(gr);
@@ -67,12 +68,11 @@ public class Menu extends JPanel implements ActionListener{
 		}
 		if(arg0.getSource()==this.settings)
 		{
-			Settings s = new Settings(this.mindWars);
-			this.mindWars.setSettings(s);
+			
 			
 			this.mindWars.getContentPane().removeAll();
-			this.mindWars.getContentPane().add(s);
-			this.mindWars.setContentPane(s);
+			this.mindWars.getContentPane().add(this.mindWars.getSettings());
+			this.mindWars.setContentPane(this.mindWars.getSettings());
 		
 		}
 		if(arg0.getSource()==this.exit)

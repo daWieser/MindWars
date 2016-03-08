@@ -17,7 +17,7 @@ public class Projectile extends Entity{
 	private BufferedImage img;
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g,  Vector resrelation) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -44,7 +44,6 @@ public abstract class Entity {
 		this.dimension = new Vector(dim);
 	}
 	
-	public abstract void draw(Graphics g);
 	
 	/**
 	 * 
@@ -64,10 +63,7 @@ public abstract class Entity {
 		this.fallVelocity = fallVelocity;
 	}
 
-	public void draw(Graphics g, Vector resrelation) {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void draw(Graphics g, Vector resrelation);
 
 	
 	

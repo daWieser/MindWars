@@ -48,12 +48,18 @@ public class GameGraphics extends JPanel implements Runnable{
 			this.entities.get(i).draw(g, resrelation);
 		}
 		
+		
 	}
 
 	@Override
 	public void run() {
 		while (true){
 			repaint();
+			try {
+				Thread.sleep((long)1000/mindWars.getSettings().getTicks());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
