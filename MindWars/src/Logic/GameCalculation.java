@@ -42,7 +42,7 @@ public class GameCalculation implements Runnable{
 		while (flag){
 			calcPlayerPos();
 			
-			//Gravitation:
+		//Gravitation:
 			p1.setMovement(p1.getMovement().add(map.getA_gravitation()));
 			
 			
@@ -50,8 +50,9 @@ public class GameCalculation implements Runnable{
 			Vector temp = p1.getMovement();
 			//temp.add(map.getA_inertia().turn(temp.getAngle()+180));
 			temp = temp.add(map.getA_gravitation());
-			//temp = temp.mul(new Vector(0.75,0));
+			temp = temp.mul(new Vector(0.75,0));
 			p1.setMovement(temp);
+			
 			
 			
 			try {

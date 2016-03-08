@@ -147,4 +147,10 @@ public class Vector {
 		return new Vector(this.getX()*vector.getX(),this.getY()*this.getY());
 	}
 	
+	public Vector div(Vector vector)
+	{
+		return new Vector(this.getX()/vector.getX(),this.getY()/this.getY());
+	}
+	
+	
 }
