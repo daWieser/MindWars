@@ -11,13 +11,16 @@ import Graphics.Settings;
 public class Input implements KeyListener,MouseListener, MouseMotionListener{
 	
 	private Settings settings;
-	private GameCalculation gameCalc;
+	private boolean left, right, jump, down;
 	
-	public Input(Settings settings, GameCalculation gameCalc)
+	
+	public Input(Settings settings)
 	{
-		this.gameCalc=gameCalc;
 		this.settings=settings;
-		
+		left=false;
+		right=false;
+		jump=false;
+		down=false;
 	}
 
 	@Override
@@ -25,16 +28,16 @@ public class Input implements KeyListener,MouseListener, MouseMotionListener{
 		// TODO Auto-generated method stub
 		if(arg0.getKeyCode()==settings.getKeyMoveLeft())
 		{
-			this.gameCalc.changeCharacterMovement(1);
+			left=true;
 		}
 		if(arg0.getKeyCode()==settings.getKeyMoveRight())
 		{
-			this.gameCalc.changeCharacterMovement(-1);
+			right=true;
 
 		}
 		if(arg0.getKeyCode()==settings.getKeyJump())
 		{
-			this.gameCalc.characterJump();
+			jump=true;
 		}
 		
 	}
@@ -44,13 +47,49 @@ public class Input implements KeyListener,MouseListener, MouseMotionListener{
 		// TODO Auto-generated method stub
 		if(arg0.getKeyCode()==settings.getKeyMoveLeft())
 		{
-			this.gameCalc.stopCharactermovement();
+			left=false;
 		}
 		if(arg0.getKeyCode()==settings.getKeyMoveRight())
 		{
-			this.gameCalc.stopCharactermovement();
+			right=false;
+		}
+		if(arg0.getKeyCode()==settings.getKeyJump())
+		{
+			jump=false;
 		}
 	
+	}
+
+	public boolean isLeft() {
+		return left;
+	}
+
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isJump() {
+		return jump;
+	}
+
+	public void setJump(boolean jump) {
+		this.jump = jump;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
 	}
 
 	@Override

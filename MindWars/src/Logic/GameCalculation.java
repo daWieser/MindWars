@@ -11,11 +11,13 @@ public class GameCalculation implements Runnable{
 	private Character p1;
 	private boolean flag;
 	private ArrayList<Entity> entities;
-	private Settings settings;
+	
 	
 	private int characterMovement;
 
 	private Map map;
+	private Settings settings;
+	private Input input;
 	
 	public ArrayList<Entity> getEntities() {
 		return entities;
@@ -23,7 +25,7 @@ public class GameCalculation implements Runnable{
 	public void setEntities(ArrayList<Entity> entities) {
 		this.entities = entities;
 	}
-	public GameCalculation (Map map, Settings settings){
+	public GameCalculation (Map map, Settings settings, Input input){
 		p1 = new Character(new Vector (5,0));
 		flag = true;
 		this.map = map;
@@ -59,13 +61,26 @@ public class GameCalculation implements Runnable{
 			temp = temp.mul(new Vector(0.75,0));
 			
 			//character speed
-			if(this.characterMovement!=0)
-			{
+			if(input.isLeft() ^ input.isRight()){
+				//^=XOR if both horizontal movementbuttons are pressed programm will recognize it as neither
+				double taccel;
+				if (input.isLeft()){
+					if (p1.getMovement().getX()>0){
+						p1.setMovetime(1);
+					}
+					taccel=p1.getAccel()/(p1.getMovetime()*p1.getRedaccel());
+					p1.setMovetime(p1.getMovetime()+1);
+					temp=temp.sub(new Vector (taccel,0));
+				} else {
+					if (p1.getMovement().getX()<0){
+						p1.setMovetime(1);
+					}
+					taccel=p1.getAccel()/p1.getMovetime();
+					p1.setMovetime(p1.getMovetime()+1);
+					temp=temp.add(new Vector (taccel,0));
+				}
 				
-				if(temp.getX()==0)
-					temp.setX(1);
-				else
-					temp=temp.add(new Vector(3/temp.getX()*this.characterMovement,0 ));
+				
 			}
 			
 			p1.setMovement(temp);
@@ -90,7 +105,7 @@ public class GameCalculation implements Runnable{
 		p1.setPosition(e.getPosition());
 		p1.setMovement(e.getMovement());
 	}
-	
+	/* FAGGIT BENNI METHODEN WERDEN AUSKOMMENTIERT WÖHS SCHLECHT SAN
 	public void changeCharacterMovement(int change)
 	{
 		this.characterMovement=change;
@@ -108,4 +123,5 @@ public class GameCalculation implements Runnable{
 		//TODO: Stop Character Movement
 		this.characterMovement=0;
 	}
+	*/
 }

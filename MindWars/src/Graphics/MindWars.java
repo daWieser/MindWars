@@ -18,6 +18,7 @@ public class MindWars extends JFrame {
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		
 		settings = new Settings(this);
+		input = new Input(settings);
 		
 		resolution = new Vector(this.getSize().getWidth(),this.getSize().getHeight());
 		//Auflösungsvektor für Gamegraphics

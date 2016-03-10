@@ -15,6 +15,11 @@ public class Character extends Entity{
 	private BufferedImage body;
 	
 	private Vector jumpVelocity;
+	private double accel; //rate at which the character accelerates (first step)
+	private double redaccel; //rate at which the acceleration reduces over time rate at which movetime increases
+	private int movetime; //number of ticks for which character has been running horizontally
+	
+
 	
 	public Character (Vector pos){
 		super(pos, new Vector(0,0), new Vector(50,100));
@@ -24,10 +29,39 @@ public class Character extends Entity{
 		try {
 			body = ImageIO.read(new File("resources/character_01"));
 		} catch (IOException e) {
-			System.out.println("Character loading Error");
+			System.out.println("Characterimage loading Error");
 		}
+		accel=3;
+		redaccel=1;
+		movetime=1;
 	}
 	
+	public int getMovetime() {
+		return movetime;
+	}
+	public void setMovetime(int movetime) {
+		//movetime cannot be zero because redaccel gets divided by it (sry4badenglish)
+		if (movetime!=0)
+			this.movetime = movetime;
+		else
+			this.movetime = 1;
+	}
+	
+	public double getAccel() {
+		return accel;
+	}
+
+	public void setAccel(double accel) {
+		this.accel = accel;
+	}
+
+	public double getRedaccel() {
+		return redaccel;
+	}
+
+	public void setRedaccel(double redaccel) {
+		this.redaccel = redaccel;
+	}
 	@Override
 	public void draw(Graphics g, Vector resrelation) {
 		g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY())*resrelation.getY()), (int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);

@@ -56,7 +56,7 @@ public class Menu extends JPanel implements ActionListener{
 		if(arg0.getSource()==this.play)
 		{
 
-			GameCalculation gc= new GameCalculation(new Map(""), this.mindWars.getSettings() );
+			GameCalculation gc= new GameCalculation(new Map(""), this.mindWars.getSettings(), this.mindWars.getInput() );
 			GameGraphics gr= new GameGraphics(gc,mindWars); 
 			
 			this.mindWars.setContentPane(gr);
