@@ -26,7 +26,7 @@ public class MindWars extends JFrame implements MenuListener{
 		resolution = new Vector(this.getSize().getWidth(),this.getSize().getHeight());
 		//Auflösungsvektor für Gamegraphics
 		this.addKeyListener(input);
-		this.getContentPane().addMouseListener(input);
+		this.addMouseListener(input);
 		
 		menu = new Menu(this);
 		
