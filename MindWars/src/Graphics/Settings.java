@@ -22,7 +22,9 @@ public class Settings extends JPanel implements ActionListener{
 	
 	private int key_moveLeft=KeyEvent.VK_A;
 	private int key_moveRight= KeyEvent.VK_D;
-	private int key_jump= KeyEvent.VK_W;
+	private int key_moveUp= KeyEvent.VK_W;
+	private int key_moveDown= KeyEvent.VK_S;
+	
 	
 	private int ticks;
 	
@@ -70,8 +72,13 @@ public class Settings extends JPanel implements ActionListener{
 	{
 		return this.key_moveRight;
 	}
-	public int getKeyJump()
+	public int getKeyUp()
 	{
-		return this.key_moveLeft;
+		return this.key_moveUp;
+	}
+	
+	public int getKeyDown()
+	{
+		return this.key_moveDown;
 	}
 }

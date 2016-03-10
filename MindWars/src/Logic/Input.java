@@ -6,60 +6,77 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import Graphics.InputListener;
 import Graphics.Settings;
 
 public class Input implements KeyListener,MouseListener, MouseMotionListener{
 	
 	private Settings settings;
-	private boolean left, right, jump, down;
+	//private boolean left, right, jump, down;
+	
+	private InputListener inputListener;
 	
 	
 	public Input(Settings settings)
 	{
 		this.settings=settings;
-		left=false;
-		right=false;
-		jump=false;
-		down=false;
+		this.inputListener = null;
+		
+	}
+
+	public void setInputListener(InputListener inputListener) {
+		this.inputListener = inputListener;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		if(this.inputListener ==  null) return;
+		
 		if(arg0.getKeyCode()==settings.getKeyMoveLeft())
 		{
-			left=true;
+			this.inputListener.left(true);
 		}
-		if(arg0.getKeyCode()==settings.getKeyMoveRight())
+		else if(arg0.getKeyCode()==settings.getKeyMoveRight())
 		{
-			right=true;
-
+			this.inputListener.right(true);
 		}
-		if(arg0.getKeyCode()==settings.getKeyJump())
+		else if(arg0.getKeyCode()==settings.getKeyUp())
 		{
-			jump=true;
+			this.inputListener.up(true);
 		}
-		
+		else if(arg0.getKeyCode() == settings.getKeyDown()){
+			this.inputListener.down(true);
+		}
+		else{
+			this.inputListener.key(true, arg0);
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		if(this.inputListener ==  null) return;
+		
 		if(arg0.getKeyCode()==settings.getKeyMoveLeft())
 		{
-			left=false;
+			this.inputListener.left(false);
 		}
-		if(arg0.getKeyCode()==settings.getKeyMoveRight())
+		else if(arg0.getKeyCode()==settings.getKeyMoveRight())
 		{
-			right=false;
+			this.inputListener.right(false);
 		}
-		if(arg0.getKeyCode()==settings.getKeyJump())
+		else if(arg0.getKeyCode()==settings.getKeyUp())
 		{
-			jump=false;
+			this.inputListener.up(false);
+		}
+		else if(arg0.getKeyCode() == settings.getKeyDown()){
+			this.inputListener.down(false);
+		}
+		else{
+			this.inputListener.key(false, arg0);
 		}
 	
 	}
-
+	/*
 	public boolean isLeft() {
 		return left;
 	}
@@ -91,7 +108,8 @@ public class Input implements KeyListener,MouseListener, MouseMotionListener{
 	public void setDown(boolean down) {
 		this.down = down;
 	}
-
+	*/
+	
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub

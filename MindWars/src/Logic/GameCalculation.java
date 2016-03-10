@@ -1,36 +1,41 @@
 package Logic;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import Entity.Character;
 import Entity.Entity;
+import Graphics.InputListener;
 import Graphics.Settings;
 
 
-public class GameCalculation implements Runnable{
+public class GameCalculation implements Runnable, InputListener{
 	private Character p1;
 	private boolean flag;
 	private ArrayList<Entity> entities;
 	
 	
-	private int characterMovement;
 
 	private Map map;
-	private Settings settings;
-	private Input input;
 	
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
+	
 	public void setEntities(ArrayList<Entity> entities) {
 		this.entities = entities;
 	}
-	public GameCalculation (Map map, Settings settings, Input input){
+	
+	private boolean left;
+	private boolean right;
+	private boolean up;
+	private boolean down;
+	
+	
+	public GameCalculation (Map map){
 		p1 = new Character(new Vector (5,0));
 		flag = true;
 		this.map = map;
-		
-		this.settings=settings;
 		
 		Thread t = new Thread(this);
 		t.start();
@@ -61,10 +66,10 @@ public class GameCalculation implements Runnable{
 			temp = temp.mul(new Vector(0.75,0));
 			
 			//character speed
-			if(input.isLeft() ^ input.isRight()){
+			if(this.left ^ this.right){
 				//^=XOR if both horizontal movementbuttons are pressed programm will recognize it as neither
 				double taccel;
-				if (input.isLeft()){
+				if (this.left){
 					if (p1.getMovement().getX()>0){
 						p1.setMovetime(1);
 					}
@@ -124,4 +129,31 @@ public class GameCalculation implements Runnable{
 		this.characterMovement=0;
 	}
 	*/
+	
+	
+	@Override
+	public void left(boolean status) {
+		this.left = status;
+		
+	}
+	@Override
+	public void right(boolean status) {
+		this.right = status;
+		
+	}
+	@Override
+	public void up(boolean status) {
+		this.up = status;
+		
+	}
+	@Override
+	public void down(boolean status) {
+		this.down = status;
+		
+	}
+	@Override
+	public void key(boolean status, KeyEvent k) {
+		// TODO Auto-generated method stub
+		
+	}
 }
