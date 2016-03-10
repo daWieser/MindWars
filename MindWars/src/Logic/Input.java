@@ -25,11 +25,11 @@ public class Input implements KeyListener,MouseListener, MouseMotionListener{
 		// TODO Auto-generated method stub
 		if(arg0.getKeyCode()==settings.getKeyMoveLeft())
 		{
-			this.gameCalc.changeCharacterMovement(new Vector(1,0));
+			this.gameCalc.changeCharacterMovement(1);
 		}
 		if(arg0.getKeyCode()==settings.getKeyMoveRight())
 		{
-			this.gameCalc.changeCharacterMovement(new Vector(-1,0));
+			this.gameCalc.changeCharacterMovement(-1);
 
 		}
 		if(arg0.getKeyCode()==settings.getKeyJump())
@@ -44,11 +44,11 @@ public class Input implements KeyListener,MouseListener, MouseMotionListener{
 		// TODO Auto-generated method stub
 		if(arg0.getKeyCode()==settings.getKeyMoveLeft())
 		{
-			this.gameCalc.stopCharactermovement(-1);
+			this.gameCalc.stopCharactermovement();
 		}
 		if(arg0.getKeyCode()==settings.getKeyMoveRight())
 		{
-			this.gameCalc.stopCharactermovement(1);
+			this.gameCalc.stopCharactermovement();
 		}
 	
 	}

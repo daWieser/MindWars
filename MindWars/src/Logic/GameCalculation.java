@@ -12,6 +12,8 @@ public class GameCalculation implements Runnable{
 	private boolean flag;
 	private ArrayList<Entity> entities;
 	private Settings settings;
+	
+	private int characterMovement;
 
 	private Map map;
 	
@@ -46,7 +48,7 @@ public class GameCalculation implements Runnable{
 		while (flag){
 			calcPlayerPos();
 			
-		//Gravitation:
+			//Gravitation:
 			p1.setMovement(p1.getMovement().add(map.getA_gravitation()));
 			
 			
@@ -55,6 +57,17 @@ public class GameCalculation implements Runnable{
 			//temp.add(map.getA_inertia().turn(temp.getAngle()+180));
 			temp = temp.add(map.getA_gravitation());
 			temp = temp.mul(new Vector(0.75,0));
+			
+			//character speed
+			if(this.characterMovement!=0)
+			{
+				
+				if(temp.getX()==0)
+					temp.setX(1);
+				else
+					temp=temp.add(new Vector(3/temp.getX()*this.characterMovement,0 ));
+			}
+			
 			p1.setMovement(temp);
 			
 			
@@ -78,18 +91,21 @@ public class GameCalculation implements Runnable{
 		p1.setMovement(e.getMovement());
 	}
 	
-	public void changeCharacterMovement(Vector change)
+	public void changeCharacterMovement(int change)
 	{
-		this.p1.setMovement(this.p1.getMovement().add(change));
+		this.characterMovement=change;
 	}
 	
 	public void characterJump()
 	{
 		//TODO: implement  Jump 
+		
+		this.p1.setMovement(this.p1.getMovement().add(new Vector(0,6)));
 	}
 	
-	public void stopCharactermovement(int m)
+	public void stopCharactermovement()
 	{
 		//TODO: Stop Character Movement
+		this.characterMovement=0;
 	}
 }
