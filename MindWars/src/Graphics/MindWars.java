@@ -13,6 +13,7 @@ public class MindWars extends JFrame implements MenuListener{
 	private Settings settings;
 	private Input input;
 	private Vector resolution;
+	private Map map;
 
 	public MindWars(){
 		this.setTitle("Milli sux dix");
@@ -30,6 +31,7 @@ public class MindWars extends JFrame implements MenuListener{
 		
 		menu = new Menu(this);
 		
+		map = new Map("");
 		
 		this.setContentPane(menu);
 		
@@ -97,7 +99,7 @@ public class MindWars extends JFrame implements MenuListener{
 
 	@Override
 	public void play() {
-		GameCalculation gc= new GameCalculation(new Map(""));
+		GameCalculation gc= new GameCalculation(map);
 		GameGraphics gr= new GameGraphics(gc,this);
 		this.getInput().setInputListener(gc);
 		gr.addKeyListener(this.getInput());

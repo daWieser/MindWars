@@ -36,12 +36,15 @@ public class Map {
 		
 		hitbox = new ArrayList<rect>();
 		try {
-			mappic=ImageIO.read (new File("ressources/map_01.png"));
+			mappic=ImageIO.read (new File("ressources/map.png"));
 		} catch (IOException e) {
-			System.out.println("Map load error");
+			System.out.println("Map Picture loading error");
 		}
 		//test
-		hitbox.add(new rect(new Vector(500,100), new Vector(100,100)));
+		hitbox.add(new rect(new Vector(1300,0), new Vector(300,300)));
+		hitbox.add(new rect(new Vector(400,300), new Vector(600,150)));
+		hitbox.add(new rect(new Vector(0,550), new Vector(200,100)));
+		hitbox.add(new rect(new Vector(500,700), new Vector(500,50)));
 	}
 	
 	/**
