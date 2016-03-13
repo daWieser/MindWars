@@ -54,7 +54,7 @@ public class Settings extends JPanel implements ActionListener{
 		this.button_FullScreen.setBounds(200, 200, 100, 100);
 		this.add(this.button_FullScreen);
 		
-		this.mindWars.setVisible(true);
+		
 		
 	}
 	

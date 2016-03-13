@@ -27,8 +27,9 @@ public class Character extends Entity{
 		this.setFallVelocity(new Vector(1,1));
 		this.setJumpVelocity(new Vector(0, 70));
 		try {
-			body = ImageIO.read(new File("resources/character_01"));
+			body = ImageIO.read(new File("resources/character1_0.png"));
 		} catch (IOException e) {
+			body = null;
 			System.out.println("Characterimage loading Error");
 		}
 		accel=3;
@@ -64,7 +65,7 @@ public class Character extends Entity{
 	}
 	@Override
 	public void draw(Graphics g, Vector resrelation) {
-		g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY())*resrelation.getY()), (int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+		if(body != null) g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY())*resrelation.getY()), (int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
 	}
 
 	@Override

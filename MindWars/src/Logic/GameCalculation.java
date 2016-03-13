@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Entity.Character;
 import Entity.Entity;
 import Graphics.InputListener;
+import Graphics.MindWars;
 import Graphics.Settings;
 
 
@@ -17,6 +18,7 @@ public class GameCalculation implements Runnable, InputListener{
 	
 
 	private Map map;
+	private MindWars mindWars;
 	
 	public ArrayList<Entity> getEntities() {
 		return entities;
@@ -32,10 +34,13 @@ public class GameCalculation implements Runnable, InputListener{
 	private boolean down;
 	
 	
-	public GameCalculation (Map map){
-		p1 = new Character(new Vector (5,0));
+	public GameCalculation (MindWars mindWars){
+		this.mindWars = mindWars;
+		p1 = new Character(new Vector (1400,500));
+		entities = new ArrayList<Entity>();
+		entities.add(p1);
 		flag = true;
-		this.map = map;
+		this.map = mindWars.getMap();
 		
 		Thread t = new Thread(this);
 		t.start();
@@ -52,6 +57,7 @@ public class GameCalculation implements Runnable, InputListener{
 	}
 	@Override
 	public void run() {
+		//flag = false;
 		while (flag){
 			calcPlayerPos();
 			
@@ -153,7 +159,13 @@ public class GameCalculation implements Runnable, InputListener{
 	}
 	@Override
 	public void key(boolean status, KeyEvent k) {
-		// TODO Auto-generated method stub
+		if(k.getKeyCode() == KeyEvent.VK_ESCAPE){
+			//mindWars.toMenue();
+		}
 		
+	}
+	
+	public void stop(){
+		this.flag = false;
 	}
 }

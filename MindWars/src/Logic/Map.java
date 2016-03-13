@@ -36,8 +36,9 @@ public class Map {
 		
 		hitbox = new ArrayList<rect>();
 		try {
-			mappic=ImageIO.read (new File("ressources/map.png"));
+			mappic=ImageIO.read (new File("resources/" + name + ".png"));
 		} catch (IOException e) {
+			mappic = null;
 			System.out.println("Map Picture loading error");
 		}
 		//test

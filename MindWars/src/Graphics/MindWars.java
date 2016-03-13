@@ -1,8 +1,15 @@
 package Graphics;
 
 import Logic.*;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.*;
 
@@ -15,30 +22,56 @@ public class MindWars extends JFrame implements MenuListener{
 	private Vector resolution;
 	private Map map;
 
+	public Map getMap() {
+		return map;
+	}
+
+
+	public void setMap(Map map) {
+		this.map = map;
+	}
+
+
 	public MindWars(){
 		this.setTitle("Milli sux dix");
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+		this.setUndecorated(true);
 		
-		settings = new Settings(this);
+		this.addWindowListener(new WindowListener(){
+			public void windowActivated(WindowEvent arg0) {}
+			public void windowClosed(WindowEvent arg0) {}
+			public void windowClosing(WindowEvent arg0) {
+				exit();
+			}
+			public void windowDeactivated(WindowEvent arg0) {}
+			public void windowDeiconified(WindowEvent arg0) {}
+			public void windowIconified(WindowEvent arg0) {}
+			public void windowOpened(WindowEvent arg0) {}
+		});
+		
+		this.settings = new Settings(this);
 		
 		
-		input = new Input(settings);
+		this.input = new Input(settings);
 		
-		resolution = new Vector(this.getSize().getWidth(),this.getSize().getHeight());
 		//Auflösungsvektor für Gamegraphics
 		this.addKeyListener(input);
 		this.addMouseListener(input);
 		
-		menu = new Menu(this);
+		this.menu = new Menu(this);
+		this.menu.setBackground(Color.WHITE);
 		
-		map = new Map("");
+		this.map = new Map("Map");
 		
-		this.setContentPane(menu);
+		this.getContentPane().add(menu);
+		this.input.setInputListener(menu);
+		//play();
 		
-		input.setInputListener(menu);
-		
-		//this.setUndecorated(true);
-		
+		this.gameGraphics = null;
+		this.gameCalculation = null;
+		this.pack();
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.resolution = new Vector(dim.getWidth(), dim.getHeight());//this.getSize().getWidth(),this.getSize().getHeight()); //des ged nimme xD
 		this.setVisible(true);
 	}
 	
@@ -58,7 +91,12 @@ public class MindWars extends JFrame implements MenuListener{
 	 */	
 	public void toMenue()
 	{
-		this.setContentPane(menu);
+		this.stop();
+		this.getContentPane().removeAll();
+		this.getContentPane().add(menu);
+		this.getInput().setInputListener(menu);
+		update();
+		
 	}
 	
 	public Settings getSettings() {
@@ -78,6 +116,9 @@ public class MindWars extends JFrame implements MenuListener{
 
 	public void setGameGraphics(GameGraphics gameGraphics) {
 		this.gameGraphics = gameGraphics;
+		this.getContentPane().removeAll();
+		this.getContentPane().add(gameGraphics);
+		update();
 	}
 
 	public GameCalculation getGameCalculation() {
@@ -99,23 +140,21 @@ public class MindWars extends JFrame implements MenuListener{
 
 	@Override
 	public void play() {
-		GameCalculation gc= new GameCalculation(map);
-		GameGraphics gr= new GameGraphics(gc,this);
-		this.getInput().setInputListener(gc);
-		gr.addKeyListener(this.getInput());
-		gr.addMouseListener(this.getInput());
-		
-		this.setContentPane(gr);
-		this.setGameGraphics(gr);
+		GameCalculation gc = new GameCalculation(this);
 		this.setGameCalculation(gc);
+		this.getInput().setInputListener(gc);
 		
+		GameGraphics gr= new GameGraphics(this);
+		/*gr.addKeyListener(this.getInput());
+		gr.addMouseListener(this.getInput());*/
+		this.setGameGraphics(gr);
 	}
 
 
 	@Override
 	public void leveleditor() {
-		this.getContentPane().removeAll();
-		this.getContentPane().add(this.getSettings());
+		//this.getContentPane().removeAll();
+		//this.getContentPane().add(this.getSettings());
 		this.setContentPane(this.getSettings());
 	}
 
@@ -126,14 +165,24 @@ public class MindWars extends JFrame implements MenuListener{
 		
 	}
 
-
+	public void stop(){
+		if(this.getGameGraphics() != null) this.getGameGraphics().stop();
+		if(this.getGameCalculation() != null) this.getGameCalculation().stop();
+		
+	}
+	
 	@Override
 	public void exit() {
+		this.stop();
 		System.exit(0);
 	}
 	
 	
-	
+	private void update(){
+		//this.pack();
+		this.validate();
+		this.repaint();
+	}
 	
 
 	

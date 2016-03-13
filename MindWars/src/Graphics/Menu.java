@@ -100,7 +100,7 @@ public class Menu extends JPanel implements ActionListener, InputListener{
 
 	@Override
 	public void key(boolean status, KeyEvent k) {
-		// TODO Auto-generated method stub
+		System.out.println("2");
 		
 	}
 
