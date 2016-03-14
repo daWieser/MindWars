@@ -46,7 +46,7 @@ public class Vector {
 	 */
 	public Vector sub(Vector v)
 	{
-		return new Vector(this.x + v.getX(), this.y + v.getY());
+		return new Vector(this.x - v.getX(), this.y - v.getY());
 	}
 	
 	/**
@@ -71,12 +71,23 @@ public class Vector {
 	/**
 	 * Turns this Vector at a given angle
 	 * @param deg  angle in degree
+	 * @return 
 	 * @return new Vector
 	 */
-	public Vector turn(double deg)
-	{
-		return new Vector(this.x*Math.sin(deg*Math.PI/180),this.y*Math.cos(deg*Math.PI/180));
-	}
+    public Vector turn(int a)
+    {
+        double x=this.x;
+        double y= this.y;
+        
+        double xn;
+        double yn;
+
+        xn=(float)(x*Math.cos(a*Math.PI/180)-y*Math.sin(a*Math.PI/180));
+        yn=(float)(x*Math.sin(a*Math.PI/180)+y*Math.cos(a*Math.PI/180));
+        
+        return new Vector(xn,yn);
+
+    }
 	
 	public double getAngle(){
 		double a = 0;
