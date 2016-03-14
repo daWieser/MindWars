@@ -163,5 +163,13 @@ public class Vector {
 		return new Vector(this.getX()/vector.getX(),this.getY()/this.getY());
 	}
 	
+	public boolean equals(Vector v){
+		if(this.getX() == v.getX() && this.getY() == v.getY()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
 }

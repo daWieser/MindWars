@@ -15,17 +15,19 @@ public class Character extends Entity{
 	private BufferedImage body;
 	
 	private Vector jumpVelocity;
+	private Vector spawn;
 	private double accel; //rate at which the character accelerates (first step)
 	private double redaccel; //rate at which the acceleration reduces over time rate at which movetime increases
 	private int movetime; //number of ticks for which character has been running horizontally
 	
-
+	private int jumpTime;
+	private int maxJumpTime;
 	
 	public Character (Vector pos){
 		super(pos, new Vector(0,0), new Vector(50,100));
-		
+		this.setSpawn(pos);
 		this.setFallVelocity(new Vector(1,1));
-		this.setJumpVelocity(new Vector(0, 70));
+		this.setJumpVelocity(new Vector(0, 5));
 		try {
 			body = ImageIO.read(new File("resources/character1_0.png"));
 		} catch (IOException e) {
@@ -35,8 +37,25 @@ public class Character extends Entity{
 		accel=3;
 		redaccel=1;
 		movetime=1;
+		maxJumpTime=20;
 	}
 	
+	public int getMaxJumpTime() {
+		return maxJumpTime;
+	}
+
+	public void setMaxJumpTime(int maxJumpTime) {
+		this.maxJumpTime = maxJumpTime;
+	}
+
+	public Vector getSpawn() {
+		return spawn;
+	}
+
+	public void setSpawn(Vector spawn) {
+		this.spawn = spawn;
+	}
+
 	public int getMovetime() {
 		return movetime;
 	}
@@ -75,6 +94,7 @@ public class Character extends Entity{
 			this.getMovement().setX(0);
 		}
 		if(id == 2 || id == 4){
+			if(id == 2) this.setGrounded(true);
 			this.getMovement().setY(0);
 		}
 		return 0;
@@ -88,8 +108,19 @@ public class Character extends Entity{
 		this.jumpVelocity = jumpVelocity;
 	}
 
+	public int getJumpTime() {
+		return jumpTime;
+	}
+
+	public void setJumpTime(int jumpTime) {
+		this.jumpTime = jumpTime;
+	}
 
 	
+	public void respawn(){
+		this.setPosition(this.getSpawn());
+		this.setMovement(new Vector(0,0));
+	}
 	
 
 }

@@ -58,6 +58,7 @@ public class GameCalculation implements Runnable, InputListener{
 	@Override
 	public void run() {
 		//flag = false;
+		int sec = 0;
 		while (flag){
 			
 			//Gravitation:
@@ -67,7 +68,7 @@ public class GameCalculation implements Runnable, InputListener{
 			//Trägheit (negative Beschleunigung gegen Null der x-Ebene):
 			Vector temp = p1.getMovement();
 			//temp.add(map.getA_inertia().turn(temp.getAngle()+180));
-			temp = temp.add(map.getA_gravitation());
+			if(sec == 0)temp = temp.add(map.getA_gravitation());
 			//temp = temp.mul(new Vector(0.75,0));
 			
 			//character speed
@@ -89,26 +90,35 @@ public class GameCalculation implements Runnable, InputListener{
 					p1.setMovetime(p1.getMovetime()+1);
 					temp=temp.add(new Vector (taccel,0));
 				}
-				
-				
 			}
-			if(temp.getY() > 10){
-				temp.setY(10);
+			
+			if(temp.getY() > 20){
+				temp.setY(20);
 			}
 			if(temp.getX() > 10){
 				temp.setX(10);
 			}
 			
-			if(temp.getY() < -10){
-				temp.setY(-10);
+			if(temp.getY() < -20){
+				temp.setY(-20);
 			}
 			if(temp.getX() < -10){
 				temp.setX(-10);
 			}
 			
+			if(this.up && !this.down){ //Jump
+				if(p1.getJumpTime() != 0){
+					temp = temp.add(p1.getJumpVelocity());
+					p1.setJumpTime(p1.getJumpTime()-1);
+				}
+			}
+			
+			
+			
+			
 			//p1.setPosition(p1.getPosition().add(temp));
 			p1.setMovement(temp);
-			
+			//p1.setGrounded(false);
 			calcPlayerPos();
 			
 			try {
@@ -117,7 +127,8 @@ public class GameCalculation implements Runnable, InputListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			sec++;
+			if(sec == 30) sec = 0;
 		}		
 	}
 	
@@ -131,6 +142,29 @@ public class GameCalculation implements Runnable, InputListener{
 		
 		p1.setPosition(e.getPosition());
 		p1.setMovement(e.getMovement());
+		p1.setGrounded(e.isGrounded());
+		if(p1.isGrounded()){
+			p1.setJumpTime(p1.getJumpTime()+1);
+			if(p1.getJumpTime() > p1.getMaxJumpTime()) p1.setJumpTime(p1.getMaxJumpTime());
+		}
+		
+		if(p1.getPosition().getX() < 0) {
+			Vector p = p1.getPosition();
+			p.setX(0);
+			p1.setPosition(p);
+		}
+		
+		if(p1.getPosition().getX() > 1600-p1.getDimension().getX()) {
+			Vector p = p1.getPosition();
+			p.setX(1600-p1.getDimension().getX());
+			p1.setPosition(p);
+		}
+		
+		
+		if(p1.getPosition().getY() < 0){
+			p1.respawn();
+		}
+		
 
 	}
 	

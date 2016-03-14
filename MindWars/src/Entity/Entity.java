@@ -10,10 +10,18 @@ public abstract class Entity {
 	protected Vector dimension;
 	
 	private Vector fallVelocity;
+	protected boolean grounded;
 	
 	
 	
-	
+	public boolean isGrounded() {
+		return grounded;
+	}
+
+	public void setGrounded(boolean grounded) {
+		this.grounded = grounded;
+	}
+
 	public Vector getPosition() {
 		return position;
 	}
@@ -42,6 +50,7 @@ public abstract class Entity {
 		this.position = new Vector(pos);
 		this.movement = new Vector(mov);
 		this.dimension = new Vector(dim);
+		grounded = false;
 	}
 	
 	
