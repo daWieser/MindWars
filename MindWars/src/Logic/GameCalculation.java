@@ -57,11 +57,9 @@ public class GameCalculation implements Runnable, InputListener{
 	}
 	@Override
 	public void run() {
-		System.out.println("Thread started");
 		//flag = false;
 		while (flag){
-			calcPlayerPos();
-			System.out.println(p1.getPosition().toString());
+			
 			//Gravitation:
 			p1.setMovement(p1.getMovement().add(map.getA_gravitation()));
 			
@@ -94,10 +92,24 @@ public class GameCalculation implements Runnable, InputListener{
 				
 				
 			}
+			if(temp.getY() > 10){
+				temp.setY(10);
+			}
+			if(temp.getX() > 10){
+				temp.setX(10);
+			}
 			
+			if(temp.getY() < -10){
+				temp.setY(-10);
+			}
+			if(temp.getX() < -10){
+				temp.setX(-10);
+			}
+			
+			//p1.setPosition(p1.getPosition().add(temp));
 			p1.setMovement(temp);
 			
-			
+			calcPlayerPos();
 			
 			try {
 				Thread.sleep(33);
@@ -112,30 +124,17 @@ public class GameCalculation implements Runnable, InputListener{
 
 	private void calcPlayerPos(){
 		Character p1t = new Character(p1.getPosition().add(p1.getMovement()));
+		p1t.setMovement(p1.getMovement());
 		Entity e = map.checkHitbox(p1t);
 		
-		p1.setPosition(e.getPosition());
-		p1.setMovement(e.getMovement());
-	}
-	/* FAGGIT BENNI METHODEN WERDEN AUSKOMMENTIERT WÖHS SCHLECHT SAN
-	public void changeCharacterMovement(int change)
-	{
-		this.characterMovement=change;
-	}
-	
-	public void characterJump()
-	{
-		//TODO: implement  Jump 
+		//System.out.println(map.checkHitbox(p1t.getMovement(), p1t.getDimension()));
 		
-		this.p1.setMovement(this.p1.getMovement().add(new Vector(0,6)));
+		p1.setPosition(e.getPosition());
+		System.out.println(e.getMovement().toString());
+		p1.setMovement(e.getMovement());
+		System.out.println(p1.getMovement().toString());
 	}
 	
-	public void stopCharactermovement()
-	{
-		//TODO: Stop Character Movement
-		this.characterMovement=0;
-	}
-	*/
 	
 	
 	@Override

@@ -35,7 +35,7 @@ public class MindWars extends JFrame implements MenuListener{
 	public MindWars(){
 		this.setTitle("Milli sux dix");
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
-		this.setUndecorated(true);
+		//this.setUndecorated(true);
 		
 		this.addWindowListener(new WindowListener(){
 			public void windowActivated(WindowEvent arg0) {}

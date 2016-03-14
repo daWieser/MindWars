@@ -71,10 +71,10 @@ public class Character extends Entity{
 	@Override
 	public int hitBox(int id) {
 		if(id == 1 || id == 3){
-			this.getMovement().sub(new Vector(this.getMovement().getX(), 0));
+			this.getMovement().setX(0);
 		}
 		if(id == 2 || id == 4){
-			this.getMovement().sub(new Vector(0,this.getMovement().getY()));
+			this.getMovement().setY(0);
 		}
 		return 0;
 	}
