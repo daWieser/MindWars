@@ -57,10 +57,11 @@ public class GameCalculation implements Runnable, InputListener{
 	}
 	@Override
 	public void run() {
+		System.out.println("Thread started");
 		//flag = false;
 		while (flag){
 			calcPlayerPos();
-			
+			System.out.println(p1.getPosition().toString());
 			//Gravitation:
 			p1.setMovement(p1.getMovement().add(map.getA_gravitation()));
 			
@@ -69,7 +70,7 @@ public class GameCalculation implements Runnable, InputListener{
 			Vector temp = p1.getMovement();
 			//temp.add(map.getA_inertia().turn(temp.getAngle()+180));
 			temp = temp.add(map.getA_gravitation());
-			temp = temp.mul(new Vector(0.75,0));
+			//temp = temp.mul(new Vector(0.75,0));
 			
 			//character speed
 			if(this.left ^ this.right){

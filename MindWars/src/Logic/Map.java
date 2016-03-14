@@ -33,7 +33,7 @@ public class Map {
 
 	public Map (String name){
 		
-		
+		a_gravitation = new Vector (0,-1);
 		hitbox = new ArrayList<rect>();
 		try {
 			mappic=ImageIO.read (new File("resources/" + name + ".png"));
@@ -83,29 +83,29 @@ public class Map {
 				double diff = eleft-hright;
 				e.getPosition().add(new Vector(diff, 0));
 				e.hitBox(1);
-				i--;
-				continue;
+				//i--;
+				//continue;
 			}
 			if(!(ebottom > htop)){ // collision top of entity
 				double diff = htop-ebottom;
 				e.getPosition().add(new Vector(0, diff));
 				e.hitBox(2);
-				i--;
-				continue;
+				//i--;
+				//continue;
 			}
 			if(!(hleft > eright)){ //collision right of entity
 				double diff = eright-hleft;
 				e.getPosition().add(new Vector(diff, 0));
 				e.hitBox(3);
-				i--;
-				continue;
+				//i--;
+				//continue;
 			}
 			if(!(hbottom > etop)){ //collision bottom of entity
 				double diff = hbottom-etop;
 				e.getPosition().add(new Vector(0, diff));
 				e.hitBox(4);
-				i--;
-				continue;
+				//i--;
+				//continue;
 			}
 		}
 		return e;
