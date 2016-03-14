@@ -85,7 +85,7 @@ public class GameCalculation implements Runnable, InputListener{
 					if (p1.getMovement().getX()<0){
 						p1.setMovetime(1);
 					}
-					taccel=p1.getAccel()/p1.getMovetime();
+					taccel=p1.getAccel()/p1.getMovetime()*p1.getRedaccel();
 					p1.setMovetime(p1.getMovetime()+1);
 					temp=temp.add(new Vector (taccel,0));
 				}
@@ -130,9 +130,8 @@ public class GameCalculation implements Runnable, InputListener{
 		//System.out.println(map.checkHitbox(p1t.getMovement(), p1t.getDimension()));
 		
 		p1.setPosition(e.getPosition());
-		System.out.println(e.getMovement().toString());
 		p1.setMovement(e.getMovement());
-		System.out.println(p1.getMovement().toString());
+
 	}
 	
 	

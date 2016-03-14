@@ -65,7 +65,8 @@ public class Character extends Entity{
 	}
 	@Override
 	public void draw(Graphics g, Vector resrelation) {
-		if(body != null) g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY())*resrelation.getY()), (int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+		if(body != null) g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()), (int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+		
 	}
 
 	@Override

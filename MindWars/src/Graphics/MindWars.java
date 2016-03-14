@@ -35,7 +35,7 @@ public class MindWars extends JFrame implements MenuListener{
 	public MindWars(){
 		this.setTitle("Milli sux dix");
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
-		//this.setUndecorated(true);
+		this.setUndecorated(true);
 		
 		this.addWindowListener(new WindowListener(){
 			public void windowActivated(WindowEvent arg0) {}
@@ -72,6 +72,8 @@ public class MindWars extends JFrame implements MenuListener{
 		this.pack();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.resolution = new Vector(dim.getWidth(), dim.getHeight());//this.getSize().getWidth(),this.getSize().getHeight()); //des ged nimme xD
+		
+		play();
 		this.setVisible(true);
 	}
 	
@@ -145,8 +147,8 @@ public class MindWars extends JFrame implements MenuListener{
 		this.getInput().setInputListener(gc);
 		
 		GameGraphics gr= new GameGraphics(this);
-		/*gr.addKeyListener(this.getInput());
-		gr.addMouseListener(this.getInput());*/
+		gr.addKeyListener(this.getInput());
+		gr.addMouseListener(this.getInput());
 		this.setGameGraphics(gr);
 	}
 
@@ -182,6 +184,7 @@ public class MindWars extends JFrame implements MenuListener{
 		//this.pack();
 		this.validate();
 		this.repaint();
+		this.requestFocus();
 	}
 	
 

@@ -45,8 +45,8 @@ public class Map {
 		hitbox.add(new rect(new Vector(1300,0), new Vector(300,300)));
 		/*hitbox.add(new rect(new Vector(400,300), new Vector(600,150)));
 		hitbox.add(new rect(new Vector(0,550), new Vector(200,100)));
-		hitbox.add(new rect(new Vector(500,700), new Vector(500,50)));
-		*/
+		hitbox.add(new rect(new Vector(500,700), new Vector(500,50)));*/
+		
 	}
 	
 	/**
@@ -69,23 +69,31 @@ public class Map {
 			double htop =hitbox.get(i).position.getY()+hitbox.get(i).dimension.getY();
 			double hright =hitbox.get(i).position.getX()+hitbox.get(i).dimension.getX();
 			
-			if(!(eleft > hright || eright > hleft)){ //collision left of entity
-				System.out.println("l");
-				double diff = eleft-hright;
-				e.getPosition().add(new Vector(diff, 0));
-				e.hitBox(1);
-				//i--;
-				//continue;
+			double diff=0;
+			if(ebottom > hbottom && etop < htop){
+				if(!(eleft > hright || eright > hleft)){ //collision left of entity
+					if (e.getMovement().getX()>0){
+						diff = hleft - eright;
+					} else {
+						diff = hright - eleft;
+					}
+					e.hitBox(1);
+				}
 			}
-			
-			if(!(hbottom > etop || ebottom > htop)){ //collision bottom of entity
-				System.out.println("b");
-				double diff = ebottom-htop;
-				e.setPosition(e.getPosition().sub(new Vector(0, diff)));
-				e.hitBox(4);
-				//i--;
-				//continue;
+			if(eleft > hleft && eright < hright){
+				if(!(hbottom > etop || ebottom > htop)){ //collision bottom of entity
+					if (e.getMovement().getY()>0){
+						diff = hbottom-etop;
+					}else{
+						diff = htop-ebottom;
+					}
+					
+					
+					
+					e.hitBox(4);
+				}
 			}
+			e.setPosition(e.getPosition().add(new Vector(0, diff)));
 		}
 		return e;
 	}

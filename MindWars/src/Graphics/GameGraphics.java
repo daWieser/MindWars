@@ -34,6 +34,7 @@ public class GameGraphics extends JPanel implements Runnable{
 		this.resrelation = new Vector(mindWars.getResolution().getX()/1600,mindWars.getResolution().getY()/900);
 		this.entities=this.gameCalc.getEntities();
 		this.map=this.mindWars.getMap();
+		this.requestFocus();
 		flag=true;
 		Thread t = new Thread(this);
 		t.start();

@@ -30,18 +30,16 @@ public class Input implements KeyListener,MouseListener, MouseMotionListener{
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		System.out.println("w");
-		System.out.println(KeyEvent.getKeyText(arg0.getKeyCode()));
 		if(this.inputListener ==  null) return;
 		
 		if(arg0.getKeyCode()==settings.getKeyMoveLeft())
 		{
-			System.out.println("a");
+			
 			this.inputListener.left(true);
 		}
 		else if(arg0.getKeyCode()==settings.getKeyMoveRight())
 		{
-			System.out.println("d");
+			
 			this.inputListener.right(true);
 		}
 		else if(arg0.getKeyCode()==settings.getKeyUp())
