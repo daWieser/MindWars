@@ -89,8 +89,12 @@ public class Map {
 					
 					if(Math.abs(ydiff) < Math.abs(xdiff)){ //differenzieren zw. vertikaler und horizontaler überschneidung; bei dünner sochn kritisch
 						
-						if(e.getMovement().getY() < 0) e.hitBox(2);
-						else e.hitBox(4);
+						if(e.getMovement().getY() < 0){
+							e.hitBox(2);
+							e.setGrounded(true);
+						} else {
+							e.hitBox(4);
+						}
 						e.setPosition(e.getPosition().add(new Vector(0, ydiff)));
 					}
 					else{
