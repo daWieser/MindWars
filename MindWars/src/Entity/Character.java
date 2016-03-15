@@ -13,12 +13,18 @@ public class Character extends Entity{
 
 	private BufferedImage head;
 	private BufferedImage body;
+	private BufferedImage[] run;
+	private int runanim, runprog;
+	
 	
 	private Vector jumpVelocity;
 	private Vector spawn;
 	private double accel; //rate at which the character accelerates (first step)
 	private double redaccel; //rate at which the acceleration reduces over time rate at which movetime increases
 	private int movetime; //number of ticks for which character has been running horizontally
+	
+	private Vector maxspeed;
+	private Vector minspeed;
 	
 	private int jumpTime;
 	private int maxJumpTime;
@@ -28,11 +34,26 @@ public class Character extends Entity{
 		this.setSpawn(pos);
 		this.setFallVelocity(new Vector(1,1));
 		this.setJumpVelocity(new Vector(0, 5));
+		
+		maxspeed = new Vector(20,40);
+		minspeed = new Vector(2,2);
+		
+		runanim = 2;
+		runprog = 0;
 		try {
-			body = ImageIO.read(new File("resources/character1_0.png"));
+			body = ImageIO.read(new File("resources/character2_0.png"));
 		} catch (IOException e) {
 			body = null;
 			System.out.println("Characterimage loading Error");
+		}
+		run = new BufferedImage [runanim];
+		for (int i=0;i<runanim;i++){
+			try {
+				run[i] = ImageIO.read(new File("resources/character1_"+Integer.toString(i)+".png"));
+			} catch (IOException e) {
+				run[i] = null;
+				System.out.println("Failed to load Image character1_"+Integer.toString(i)+" for running animation");
+			}
 		}
 		accel=3;
 		redaccel=1;
@@ -40,6 +61,22 @@ public class Character extends Entity{
 		maxJumpTime=20;
 	}
 	
+	public Vector getMinspeed() {
+		return minspeed;
+	}
+
+	public void setMinspeed(Vector minspeed) {
+		this.minspeed = minspeed;
+	}
+
+	public Vector getMaxspeed() {
+		return maxspeed;
+	}
+
+	public void setMaxspeed(Vector maxspeed) {
+		this.maxspeed = maxspeed;
+	}
+
 	public int getMaxJumpTime() {
 		return maxJumpTime;
 	}
@@ -84,8 +121,21 @@ public class Character extends Entity{
 	}
 	@Override
 	public void draw(Graphics g, Vector resrelation) {
-		if(body != null) g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()), (int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
-		
+		if (this.getMovement().getX()==0){
+			if(body != null) g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()), (-1)*(int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+		}
+		if (this.getMovement().getX()<0){
+			g.drawImage(run[runprog], (int)((position.getX()+dimension.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()), (-1)*(int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+			runprog++;
+			if (runprog>=runanim)
+				runprog=0;
+		}
+		if (this.getMovement().getX()>0){
+			g.drawImage(run[runprog], (int)((position.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()),(int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+			runprog++;
+			if (runprog>=runanim)
+				runprog=0;
+		}
 	}
 
 	@Override

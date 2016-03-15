@@ -92,19 +92,30 @@ public class GameCalculation implements Runnable, InputListener{
 				}
 			}
 			
-			if(temp.getY() > 20){
-				temp.setY(20);
+			//If maxSpeed is reached Movement will stay at max speed
+			if(temp.getY() > p1.getMaxspeed().getY()){
+				temp.setY(p1.getMaxspeed().getY());
 			}
-			if(temp.getX() > 10){
-				temp.setX(10);
+			if(temp.getX() > p1.getMaxspeed().getX()){
+				temp.setX(p1.getMaxspeed().getX());
+			}
+			if(temp.getY() < (-1)*p1.getMaxspeed().getY()){
+				temp.setY((-1)*p1.getMaxspeed().getY());
+			}
+			if(temp.getX() < (-1)*p1.getMaxspeed().getX()){
+				temp.setX((-1)*p1.getMaxspeed().getX());
 			}
 			
-			if(temp.getY() < -20){
-				temp.setY(-20);
+			//If minSpeed is reached Movement will be 0
+			
+			if (Math.abs(temp.getX())<p1.getMinspeed().getX()){
+				temp.setX(0);
 			}
-			if(temp.getX() < -10){
-				temp.setX(-10);
+			if (Math.abs(temp.getY())<p1.getMinspeed().getY()){
+				temp.setY(0);
 			}
+			
+			
 			
 			if(this.up && !this.down){ //Jump
 				if(p1.getJumpTime() != 0){
@@ -134,9 +145,9 @@ public class GameCalculation implements Runnable, InputListener{
 	
 
 	private void calcPlayerPos(){
-		Character p1t = new Character(p1.getPosition().add(p1.getMovement()));
-		p1t.setMovement(p1.getMovement());
-		Entity e = map.checkHitbox(p1t);
+		//Character p1t = new Character(p1.getPosition().add(p1.getMovement()));
+		p1.setPosition(p1.getPosition().add(p1.getMovement()));
+		Entity e = map.checkHitbox(p1);
 		
 		//System.out.println(map.checkHitbox(p1t.getMovement(), p1t.getDimension()));
 		
