@@ -92,6 +92,13 @@ public class GameCalculation implements Runnable, InputListener{
 				}
 			}
 			
+			if(this.left == false && this.right == false){
+				if(sec%5 == 3)temp.setX(temp.getX()*0.75);
+			}
+			else{
+				
+			}
+			
 			//If maxSpeed is reached Movement will stay at max speed
 			if(temp.getY() > p1.getMaxspeed().getY()){
 				temp.setY(p1.getMaxspeed().getY());
@@ -116,7 +123,6 @@ public class GameCalculation implements Runnable, InputListener{
 			}
 			
 			
-			
 			if(this.up && !this.down){ //Jump
 				if(p1.getJumpTime() != 0){
 					temp = temp.add(p1.getJumpVelocity());
@@ -139,7 +145,7 @@ public class GameCalculation implements Runnable, InputListener{
 				e.printStackTrace();
 			}
 			sec++;
-			if(sec == 30) sec = 0;
+			if(sec == 15) sec = 0;
 		}		
 	}
 	
@@ -156,10 +162,7 @@ public class GameCalculation implements Runnable, InputListener{
 		p1.setPosition(e.getPosition());
 		p1.setMovement(e.getMovement());
 		p1.setGrounded(e.isGrounded());
-		if(p1.isGrounded()){
-			p1.setJumpTime(p1.getMaxJumpTime());
-			//if(p1.getJumpTime() > p1.getMaxJumpTime()) p1.setJumpTime(p1.getMaxJumpTime());
-		}
+		
 		
 		if(p1.getPosition().getX() < 0) {
 			Vector p = p1.getPosition();
@@ -177,8 +180,18 @@ public class GameCalculation implements Runnable, InputListener{
 		
 		
 		if(p1.getPosition().getY() < 0){
-			p1.respawn();
+			Vector p = p1.getPosition();
+			p.setY(0);
+			p1.setPosition(p);
+			p1.hitBox(2);
+			//p1.respawn();
 		}
+		
+		if(p1.isGrounded()){
+			p1.setJumpTime(p1.getMaxJumpTime());
+			//if(p1.getJumpTime() > p1.getMaxJumpTime()) p1.setJumpTime(p1.getMaxJumpTime());
+		}
+		
 		if(p1.getPosition().getY() > 2000){
 			p1.respawn();
 		}

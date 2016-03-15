@@ -39,13 +39,13 @@ public class Character extends Entity{
 		
 		lookleft = true;
 		
-		maxspeed = new Vector(20,40);
+		maxspeed = new Vector(200,400);
 		minspeed = new Vector(2,2);
 		
 		runanim = 2;
 		runprog = 0;
 		try {
-			body = ImageIO.read(new File("resources/character2_0.png"));
+			body = ImageIO.read(new File("resources/character1_0.png"));
 		} catch (IOException e) {
 			body = null;
 			System.out.println("Characterimage loading Error");
