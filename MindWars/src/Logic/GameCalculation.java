@@ -80,15 +80,17 @@ public class GameCalculation implements Runnable, InputListener{
 					}
 					taccel=p1.getAccel()/(p1.getMovetime()*p1.getRedaccel());
 					p1.setMovetime(p1.getMovetime()+1);
-					temp=temp.sub(new Vector (taccel,0));
+					taccel=taccel*(-1);
 				} else {
 					if (p1.getMovement().getX()<=0){
 						p1.setMovetime(1);
 					}
-					taccel=p1.getAccel()/p1.getMovetime()*p1.getRedaccel();
+					taccel=p1.getAccel()/(p1.getMovetime()*p1.getRedaccel());
 					p1.setMovetime(p1.getMovetime()+1);
-					temp=temp.add(new Vector (taccel,0));
 				}
+				temp=temp.add(new Vector (taccel,0));
+				System.out.println("Movetime: "+p1.getMovetime());
+				System.out.println("Taccel: "+taccel);
 			}
 			
 			if(this.left == false && this.right == false && p1.isGrounded()){

@@ -1,0 +1,3 @@
+- Boolean Ground of Character isn´t set correctly (Character shouldn be able to walljump if stands on the ground
+- Running animation has to be proportional to the X Velocity
+- Running Calculation could use some improvements

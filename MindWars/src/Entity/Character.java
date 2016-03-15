@@ -37,7 +37,7 @@ public class Character extends Entity{
 		this.setSpawn(pos);
 		this.setFallVelocity(new Vector(1,1));
 		this.setJumpVelocity(new Vector(0, 5));
-		this.setWallJumpVelocity(new Vector(40,40));
+		this.setWallJumpVelocity(new Vector(30,30));
 		
 		lookleft = true;
 		
@@ -62,7 +62,7 @@ public class Character extends Entity{
 			}
 		}
 		accel=5;
-		redaccel=1;
+		redaccel=0.75;
 		movetime=1;
 		maxJumpTime=10;
 	}
@@ -131,7 +131,10 @@ public class Character extends Entity{
 	}
 
 	public void setRedaccel(double redaccel) {
-		this.redaccel = redaccel;
+		if (redaccel>0)
+			this.redaccel = redaccel;
+		else
+			System.out.println("Redaccel must be greater than 0");
 	}
 	@Override
 	public void draw(Graphics g, Vector resrelation) {

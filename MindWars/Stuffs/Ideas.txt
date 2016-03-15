@@ -1,0 +1,3 @@
+- Round based Matches with the ability to change characters between rounds. Therefore Characters abilities could counter each other.
+
+- Hitboxes should have an ID which indicates what should happen if a hitbox is hit.
