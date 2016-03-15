@@ -123,15 +123,15 @@ public class GameCalculation implements Runnable, InputListener{
 			
 			
 			if(this.up && !this.down){ //Jump
-				if (p1.isTouchWall()){
-					p1.setJumpTime(p1.getMaxJumpTime());
-					Vector wallJump = new Vector(p1.getJumpVelocity().getY(),p1.getJumpVelocity().getY());
-					if (!p1.isLookleft())
-						wallJump.mul(new Vector(-1,1));
-					temp.add(wallJump);
-						
+				if (p1.isTouchWall()&& !p1.isGrounded()){ //WallJump
+					p1.setJumpTime(0);
+					Vector wallJump = new Vector(p1.getWallJumpVelocity().getX(),p1.getWallJumpVelocity().getY());
+					if (!p1.isLookleft()){
+						wallJump = wallJump.mul(new Vector(-1,1));
+					}
+					temp = wallJump;
 				}
-				if(p1.getJumpTime() != 0){
+				if(p1.getJumpTime() != 0){	//Regular Jump
 					temp = temp.add(p1.getJumpVelocity());
 					p1.setJumpTime(p1.getJumpTime()-1);
 				}
@@ -163,9 +163,6 @@ public class GameCalculation implements Runnable, InputListener{
 		//Character p1t = new Character(p1.getPosition().add(p1.getMovement()));
 		p1.setPosition(p1.getPosition().add(p1.getMovement()));
 		Entity e = map.checkHitbox(p1);
-		
-		
-		//System.out.println(map.checkHitbox(p1t.getMovement(), p1t.getDimension()));
 		
 		p1.setPosition(e.getPosition());
 		p1.setTouchWall(e.isTouchWall());

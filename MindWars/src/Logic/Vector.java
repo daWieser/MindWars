@@ -155,12 +155,12 @@ public class Vector {
 
 	public Vector mul(Vector vector) {
 		
-		return new Vector(this.getX()*vector.getX(),this.getY()*this.getY());
+		return new Vector(this.getX()*vector.getX(),this.getY()*vector.getY());
 	}
 	
 	public Vector div(Vector vector)
 	{
-		return new Vector(this.getX()/vector.getX(),this.getY()/this.getY());
+		return new Vector(this.getX()/vector.getX(),this.getY()/vector.getY());
 	}
 	
 	public boolean equals(Vector v){

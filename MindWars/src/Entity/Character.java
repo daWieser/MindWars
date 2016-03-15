@@ -18,6 +18,7 @@ public class Character extends Entity{
 	
 	
 	private Vector jumpVelocity;
+	private Vector wallJumpVelocity;
 	private Vector spawn;
 	private double accel; //rate at which the character accelerates (first step)
 	private double redaccel; //rate at which the acceleration reduces over time rate at which movetime increases
@@ -36,6 +37,7 @@ public class Character extends Entity{
 		this.setSpawn(pos);
 		this.setFallVelocity(new Vector(1,1));
 		this.setJumpVelocity(new Vector(0, 5));
+		this.setWallJumpVelocity(new Vector(40,40));
 		
 		lookleft = true;
 		
@@ -65,6 +67,14 @@ public class Character extends Entity{
 		maxJumpTime=10;
 	}
 	
+	public Vector getWallJumpVelocity() {
+		return wallJumpVelocity;
+	}
+
+	public void setWallJumpVelocity(Vector wallJumpVelocity) {
+		this.wallJumpVelocity = wallJumpVelocity;
+	}
+
 	public Vector getMinspeed() {
 		return minspeed;
 	}
