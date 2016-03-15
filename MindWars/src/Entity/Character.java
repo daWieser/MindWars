@@ -26,6 +26,8 @@ public class Character extends Entity{
 	private Vector maxspeed;
 	private Vector minspeed;
 	
+	private boolean lookleft;
+	
 	private int jumpTime;
 	private int maxJumpTime;
 	
@@ -34,6 +36,8 @@ public class Character extends Entity{
 		this.setSpawn(pos);
 		this.setFallVelocity(new Vector(1,1));
 		this.setJumpVelocity(new Vector(0, 5));
+		
+		lookleft = true;
 		
 		maxspeed = new Vector(20,40);
 		minspeed = new Vector(2,2);
@@ -58,7 +62,7 @@ public class Character extends Entity{
 		accel=3;
 		redaccel=1;
 		movetime=1;
-		maxJumpTime=20;
+		maxJumpTime=10;
 	}
 	
 	public Vector getMinspeed() {
@@ -122,19 +126,26 @@ public class Character extends Entity{
 	@Override
 	public void draw(Graphics g, Vector resrelation) {
 		if (this.getMovement().getX()==0){
-			if(body != null) g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()), (-1)*(int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+			if (lookleft){
+				g.drawImage(body, (int)((position.getX()+dimension.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()), (-1)*(int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+			}else{
+				g.drawImage(body, (int)((position.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()),(int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
+	
+			}
 		}
 		if (this.getMovement().getX()<0){
 			g.drawImage(run[runprog], (int)((position.getX()+dimension.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()), (-1)*(int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
 			runprog++;
 			if (runprog>=runanim)
 				runprog=0;
+			lookleft=true;
 		}
 		if (this.getMovement().getX()>0){
 			g.drawImage(run[runprog], (int)((position.getX())*resrelation.getX()), (int)((900-position.getY()-dimension.getY())*resrelation.getY()),(int)(dimension.getX() * resrelation.getX()), (int) (dimension.getY() * resrelation.getY()), null);
 			runprog++;
 			if (runprog>=runanim)
 				runprog=0;
+			lookleft=false;
 		}
 	}
 

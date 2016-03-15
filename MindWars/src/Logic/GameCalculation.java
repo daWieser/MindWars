@@ -119,11 +119,9 @@ public class GameCalculation implements Runnable, InputListener{
 			
 			if(this.up && !this.down){ //Jump
 				if(p1.getJumpTime() != 0){
-					System.out.println("j");
 					temp = temp.add(p1.getJumpVelocity());
 					p1.setJumpTime(p1.getJumpTime()-1);
 				}
-				else System.out.println("nj");
 			}
 			
 			
@@ -167,12 +165,14 @@ public class GameCalculation implements Runnable, InputListener{
 			Vector p = p1.getPosition();
 			p.setX(0);
 			p1.setPosition(p);
+			p1.hitBox(1);
 		}
 		
 		if(p1.getPosition().getX() > 1600-p1.getDimension().getX()) {
 			Vector p = p1.getPosition();
 			p.setX(1600-p1.getDimension().getX());
 			p1.setPosition(p);
+			p1.hitBox(1);
 		}
 		
 		
