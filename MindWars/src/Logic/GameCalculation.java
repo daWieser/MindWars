@@ -119,9 +119,11 @@ public class GameCalculation implements Runnable, InputListener{
 			
 			if(this.up && !this.down){ //Jump
 				if(p1.getJumpTime() != 0){
+					System.out.println("j");
 					temp = temp.add(p1.getJumpVelocity());
 					p1.setJumpTime(p1.getJumpTime()-1);
 				}
+				else System.out.println("nj");
 			}
 			
 			
@@ -145,9 +147,11 @@ public class GameCalculation implements Runnable, InputListener{
 	
 
 	private void calcPlayerPos(){
+		p1.setGrounded(false);
 		//Character p1t = new Character(p1.getPosition().add(p1.getMovement()));
 		p1.setPosition(p1.getPosition().add(p1.getMovement()));
 		Entity e = map.checkHitbox(p1);
+		
 		
 		//System.out.println(map.checkHitbox(p1t.getMovement(), p1t.getDimension()));
 		
@@ -155,8 +159,8 @@ public class GameCalculation implements Runnable, InputListener{
 		p1.setMovement(e.getMovement());
 		p1.setGrounded(e.isGrounded());
 		if(p1.isGrounded()){
-			p1.setJumpTime(p1.getJumpTime()+1);
-			if(p1.getJumpTime() > p1.getMaxJumpTime()) p1.setJumpTime(p1.getMaxJumpTime());
+			p1.setJumpTime(p1.getMaxJumpTime());
+			//if(p1.getJumpTime() > p1.getMaxJumpTime()) p1.setJumpTime(p1.getMaxJumpTime());
 		}
 		
 		if(p1.getPosition().getX() < 0) {
@@ -173,6 +177,9 @@ public class GameCalculation implements Runnable, InputListener{
 		
 		
 		if(p1.getPosition().getY() < 0){
+			p1.respawn();
+		}
+		if(p1.getPosition().getY() > 2000){
 			p1.respawn();
 		}
 		
