@@ -59,7 +59,7 @@ public class Character extends Entity{
 				System.out.println("Failed to load Image character1_"+Integer.toString(i)+" for running animation");
 			}
 		}
-		accel=3;
+		accel=5;
 		redaccel=1;
 		movetime=1;
 		maxJumpTime=10;

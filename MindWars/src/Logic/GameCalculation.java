@@ -92,8 +92,8 @@ public class GameCalculation implements Runnable, InputListener{
 				}
 			}
 			
-			if(this.left == false && this.right == false){
-				if(sec%5 == 3)temp.setX(temp.getX()*0.75);
+			if(this.left == false && this.right == false && p1.isGrounded()){
+				if(sec%5 == 3)temp.setX(temp.getX()*0.5);
 			}
 			else{
 				
