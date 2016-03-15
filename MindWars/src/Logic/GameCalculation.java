@@ -76,14 +76,14 @@ public class GameCalculation implements Runnable, InputListener{
 				//^=XOR if both horizontal movementbuttons are pressed programm will recognize it as neither
 				double taccel;
 				if (this.left){
-					if (p1.getMovement().getX()>0){
+					if (p1.getMovement().getX()>=0){
 						p1.setMovetime(1);
 					}
 					taccel=p1.getAccel()/(p1.getMovetime()*p1.getRedaccel());
 					p1.setMovetime(p1.getMovetime()+1);
 					temp=temp.sub(new Vector (taccel,0));
 				} else {
-					if (p1.getMovement().getX()<0){
+					if (p1.getMovement().getX()<=0){
 						p1.setMovetime(1);
 					}
 					taccel=p1.getAccel()/p1.getMovetime()*p1.getRedaccel();
