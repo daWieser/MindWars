@@ -152,13 +152,23 @@ public class Character extends Entity{
 	@Override
 	public int hitBox(int id) {
 		if(id == 1 || id == 3){
+			//1 = left 3 = right
 			this.getMovement().setX(0);
+			this.setTouchWall(true);
 		}
 		if(id == 2 || id == 4){
 			if(id == 2) this.setGrounded(true);
 			this.getMovement().setY(0);
 		}
 		return 0;
+	}
+
+	public boolean isLookleft() {
+		return lookleft;
+	}
+
+	public void setLookleft(boolean lookleft) {
+		this.lookleft = lookleft;
 	}
 
 	public Vector getJumpVelocity() {

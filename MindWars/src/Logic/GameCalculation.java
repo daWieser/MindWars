@@ -60,7 +60,6 @@ public class GameCalculation implements Runnable, InputListener{
 		//flag = false;
 		int sec = 0;
 		while (flag){
-			
 			//Gravitation:
 			p1.setMovement(p1.getMovement().add(map.getA_gravitation()));
 			
@@ -124,6 +123,14 @@ public class GameCalculation implements Runnable, InputListener{
 			
 			
 			if(this.up && !this.down){ //Jump
+				if (p1.isTouchWall()){
+					p1.setJumpTime(p1.getMaxJumpTime());
+					Vector wallJump = new Vector(p1.getJumpVelocity().getY(),p1.getJumpVelocity().getY());
+					if (!p1.isLookleft())
+						wallJump.mul(new Vector(-1,1));
+					temp.add(wallJump);
+						
+				}
 				if(p1.getJumpTime() != 0){
 					temp = temp.add(p1.getJumpVelocity());
 					p1.setJumpTime(p1.getJumpTime()-1);
@@ -152,6 +159,7 @@ public class GameCalculation implements Runnable, InputListener{
 
 	private void calcPlayerPos(){
 		p1.setGrounded(false);
+		p1.setTouchWall(false);
 		//Character p1t = new Character(p1.getPosition().add(p1.getMovement()));
 		p1.setPosition(p1.getPosition().add(p1.getMovement()));
 		Entity e = map.checkHitbox(p1);
@@ -160,6 +168,7 @@ public class GameCalculation implements Runnable, InputListener{
 		//System.out.println(map.checkHitbox(p1t.getMovement(), p1t.getDimension()));
 		
 		p1.setPosition(e.getPosition());
+		p1.setTouchWall(e.isTouchWall());
 		p1.setMovement(e.getMovement());
 		p1.setGrounded(e.isGrounded());
 		

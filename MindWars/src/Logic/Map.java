@@ -71,17 +71,6 @@ public class Map {
 			
 			double xdiff=0, ydiff = 0 ;
 			if((ebottom > hbottom && ebottom < htop) || (etop > hbottom && etop < htop)){
-				/*if((eleft > hright && eright < hleft)){ //collision right of entity
-					System.out.println(e.getPosition());
-					if (e.getMovement().getX()>0){
-						diff = hleft - eright;
-					} else {
-						diff = hright - eleft;
-					}
-					e.hitBox(1);
-					System.out.println(diff);
-					e.setPosition(e.getPosition().add(new Vector(diff, 0)));
-				}*/
 				if((eleft < hright && eleft > hleft) || (eright < hright && eright > hleft)){
 					if (e.getMovement().getY()>0){
 						ydiff = hbottom-etop;
@@ -105,62 +94,20 @@ public class Map {
 						e.setPosition(e.getPosition().add(new Vector(0, ydiff)));
 					}
 					else{
+						if (e.getMovement().getX() < 0)
+							e.hitBox(1); //left
+						else
+							e.hitBox(3); //right
 						e.setPosition(e.getPosition().add(new Vector(xdiff, 0)));
-						e.hitBox(1);
 					}
 				}
 			}
-			/*else if(eleft > hleft && eright < hright){
-				//if(!(hbottom > etop || ebottom > htop)){ //collision bottom of entity
-				if(hbottom < etop && ebottom < htop){
-					if (e.getMovement().getY()>0){
-						diff = hbottom-etop;
-					}else{
-						diff = htop-ebottom;
-					}
-					
-					
-					
-					e.hitBox(4);
-					System.out.println(diff);
-					e.setPosition(e.getPosition().add(new Vector(0, diff)));
-				}
-			}*/
 			
 		}
 		return e;
 	}
 	
-	/*public boolean checkHitbox (Vector pos, Vector dim){
-		double []sentity = new double[4]; //distance between side of entity and origin of map
-		//0=left 1=bottom 2=top 3=right
-		sentity[0]=pos.getX();
-		sentity[1]=pos.getY();
-		sentity[2]=pos.getY()+dim.getY();
-		sentity[3]=pos.getX()+dim.getX();
-		
-		for (int i=0;i<hitbox.size();i++){
-			if (pos.getX()+dim.getX()>hitbox.get(i).position.getX()){
-			double []shitbox = new double[4];
-			//same as entity
-			//0=left 1=bottom 2=top 3=right
-			shitbox[0]=hitbox.get(i).position.getX();
-			shitbox[1]=hitbox.get(i).position.getY();
-			shitbox[2]=hitbox.get(i).position.getY()+hitbox.get(i).dimension.getY();
-			shitbox[3]=hitbox.get(i).position.getX()+hitbox.get(i).dimension.getX();
-			
-			if ((sentity[0]>shitbox[0])&&(sentity[0]<shitbox[3]))
-				return true;
-			if ((sentity[3]>shitbox[0])&&(sentity[3]<shitbox[3]))
-				return true;
-			if ((sentity[1]>shitbox[1])&&(sentity[1]<shitbox[2]))
-				return true;
-			if ((sentity[2]>shitbox[1])&&(sentity[2]<shitbox[2]))
- 				return true;
-			}
- 		}
- 		return false;
- 	}*/
+
 	
 	public void readMap(String name){
 		a_gravitation = new Vector(0,-3);

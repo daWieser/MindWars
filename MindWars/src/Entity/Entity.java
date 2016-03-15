@@ -11,9 +11,18 @@ public abstract class Entity {
 	
 	private Vector fallVelocity;
 	protected boolean grounded;
+	protected boolean touchWall;
 	
 	
 	
+	public boolean isTouchWall() {
+		return touchWall;
+	}
+
+	public void setTouchWall(boolean touchWall) {
+		this.touchWall = touchWall;
+	}
+
 	public boolean isGrounded() {
 		return grounded;
 	}
@@ -51,6 +60,7 @@ public abstract class Entity {
 		this.movement = new Vector(mov);
 		this.dimension = new Vector(dim);
 		grounded = false;
+		touchWall = false;
 	}
 	
 	
