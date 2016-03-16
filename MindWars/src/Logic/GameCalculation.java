@@ -143,7 +143,6 @@ public class GameCalculation implements Runnable, InputListener{
 			
 			//p1.setPosition(p1.getPosition().add(temp));
 			p1.setMovement(temp);
-			//p1.setGrounded(false);
 			calcPlayerPos();
 			
 			try {
