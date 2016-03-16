@@ -219,7 +219,8 @@ public class GameCalculation implements Runnable, InputListener{
 	@Override
 	public void up(boolean status) {
 		this.up = status;
-		p1.setJumpReleased(true);
+		
+		if(status==false)p1.setJumpReleased(true);
 		
 	}
 	@Override
