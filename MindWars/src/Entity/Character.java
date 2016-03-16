@@ -29,6 +29,9 @@ public class Character extends Entity{
 	
 	private boolean lookleft;
 	
+
+
+	private boolean jumpReleased;
 	private int jumpTime;
 	private int maxJumpTime;
 	
@@ -40,6 +43,7 @@ public class Character extends Entity{
 		this.setWallJumpVelocity(new Vector(30,30));
 		
 		lookleft = true;
+		jumpReleased = false;
 		
 		maxspeed = new Vector(200,400);
 		minspeed = new Vector(2,2);
@@ -71,6 +75,14 @@ public class Character extends Entity{
 		return wallJumpVelocity;
 	}
 
+	public boolean isJumpReleased() {
+		return jumpReleased;
+	}
+
+	public void setJumpReleased(boolean jumpReleased) {
+		this.jumpReleased = jumpReleased;
+	}
+	
 	public void setWallJumpVelocity(Vector wallJumpVelocity) {
 		this.wallJumpVelocity = wallJumpVelocity;
 	}

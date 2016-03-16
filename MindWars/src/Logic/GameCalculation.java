@@ -89,8 +89,6 @@ public class GameCalculation implements Runnable, InputListener{
 					p1.setMovetime(p1.getMovetime()+1);
 				}
 				temp=temp.add(new Vector (taccel,0));
-				System.out.println("Movetime: "+p1.getMovetime());
-				System.out.println("Taccel: "+taccel);
 			}
 			
 			if(this.left == false && this.right == false && p1.isGrounded()){
@@ -123,9 +121,8 @@ public class GameCalculation implements Runnable, InputListener{
 				temp.setY(0);
 			}
 			
-			
 			if(this.up && !this.down){ //Jump
-				if (p1.isTouchWall()&& !p1.isGrounded()){ //WallJump
+				if (p1.isTouchWall() && !p1.isGrounded() && p1.isJumpReleased()){ //WallJump
 					p1.setJumpTime(0);
 					Vector wallJump = new Vector(p1.getWallJumpVelocity().getX(),p1.getWallJumpVelocity().getY());
 					if (!p1.isLookleft()){
@@ -133,7 +130,9 @@ public class GameCalculation implements Runnable, InputListener{
 					}
 					temp = wallJump;
 				}
+				p1.setJumpReleased(false);
 				if(p1.getJumpTime() != 0){	//Regular Jump
+					
 					temp = temp.add(p1.getJumpVelocity());
 					p1.setJumpTime(p1.getJumpTime()-1);
 				}
@@ -192,7 +191,6 @@ public class GameCalculation implements Runnable, InputListener{
 			p.setY(0);
 			p1.setPosition(p);
 			p1.hitBox(2);
-			//p1.respawn();
 		}
 		
 		if(p1.isGrounded()){
@@ -222,6 +220,7 @@ public class GameCalculation implements Runnable, InputListener{
 	@Override
 	public void up(boolean status) {
 		this.up = status;
+		p1.setJumpReleased(true);
 		
 	}
 	@Override

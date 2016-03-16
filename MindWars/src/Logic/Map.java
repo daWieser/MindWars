@@ -91,7 +91,6 @@ public class Map {
 						
 						if(e.getMovement().getY() < 0){
 							e.hitBox(2);
-							e.setGrounded(true);
 						} else {
 							e.hitBox(4);
 						}
