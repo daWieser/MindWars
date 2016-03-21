@@ -15,7 +15,7 @@ public class GameCalculation implements Runnable, InputListener{
 	private boolean flag;
 	private ArrayList<Entity> entities;
 	
-	
+	private Vector temp;
 
 	private Map map;
 	private MindWars mindWars;
@@ -49,12 +49,7 @@ public class GameCalculation implements Runnable, InputListener{
 	
 	
 	
-	public Map getMap() {
-		return map;
-	}
-	public void setMap(Map map) {
-		this.map = map;
-	}
+	
 	@Override
 	public void run() {
 		//flag = false;
@@ -65,31 +60,11 @@ public class GameCalculation implements Runnable, InputListener{
 			
 			
 			//Trägheit (negative Beschleunigung gegen Null der x-Ebene):
-			Vector temp = p1.getMovement();
-			//temp.add(map.getA_inertia().turn(temp.getAngle()+180));
+			temp = p1.getMovement();
 			if(sec == 0)temp = temp.add(map.getA_gravitation());
-			//temp = temp.mul(new Vector(0.75,0));
 			
-			//character speed
-			if(this.left ^ this.right){
-				//^=XOR if both horizontal movementbuttons are pressed programm will recognize it as neither
-				double taccel;
-				if (this.left){
-					if (p1.getMovement().getX()>=0){
-						p1.setMovetime(1);
-					}
-					taccel=p1.getAccel()/(p1.getMovetime()*p1.getRedaccel());
-					p1.setMovetime(p1.getMovetime()+1);
-					taccel=taccel*(-1);
-				} else {
-					if (p1.getMovement().getX()<=0){
-						p1.setMovetime(1);
-					}
-					taccel=p1.getAccel()/(p1.getMovetime()*p1.getRedaccel());
-					p1.setMovetime(p1.getMovetime()+1);
-				}
-				temp=temp.add(new Vector (taccel,0));
-			}
+			//horizontal movement
+			horizontalMovement();
 			
 			if(this.left == false && this.right == false && p1.isGrounded()){
 				if(sec%5 == 3)temp.setX(temp.getX()*0.5);
@@ -98,57 +73,23 @@ public class GameCalculation implements Runnable, InputListener{
 				
 			}
 			
-			//If maxSpeed is reached Movement will stay at max speed
-			if(temp.getY() > p1.getMaxspeed().getY()){
-				temp.setY(p1.getMaxspeed().getY());
-			}
-			if(temp.getX() > p1.getMaxspeed().getX()){
-				temp.setX(p1.getMaxspeed().getX());
-			}
-			if(temp.getY() < (-1)*p1.getMaxspeed().getY()){
-				temp.setY((-1)*p1.getMaxspeed().getY());
-			}
-			if(temp.getX() < (-1)*p1.getMaxspeed().getX()){
-				temp.setX((-1)*p1.getMaxspeed().getX());
-			}
+			minmaxSpeed();
 			
-			//If minSpeed is reached Movement will be 0
 			
-			if (Math.abs(temp.getX())<p1.getMinspeed().getX()){
-				temp.setX(0);
-			}
-			if (Math.abs(temp.getY())<p1.getMinspeed().getY()){
-				temp.setY(0);
-			}
-			
-			if(this.up && !this.down){ //Jump
-				if (p1.isTouchWall() && !p1.isGrounded() && p1.isJumpReleased()){ //WallJump
-					p1.setJumpTime(0);
-					Vector wallJump = new Vector(p1.getWallJumpVelocity().getX(),p1.getWallJumpVelocity().getY());
-					if (!p1.isLookleft()){
-						wallJump = wallJump.mul(new Vector(-1,1));
-					}
-					temp = wallJump;
-				}
-				p1.setJumpReleased(false);
-				if(p1.getJumpTime() != 0){	//Regular Jump
-					
-					temp = temp.add(p1.getJumpVelocity());
-					p1.setJumpTime(p1.getJumpTime()-1);
-				}
+			if(this.up && !this.down){
+				jump();
 			}
 			
 			
 			
 			
-			//p1.setPosition(p1.getPosition().add(temp));
+			
 			p1.setMovement(temp);
 			calcPlayerPos();
 			
 			try {
 				Thread.sleep(33);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			sec++;
@@ -156,11 +97,69 @@ public class GameCalculation implements Runnable, InputListener{
 		}		
 	}
 	
+	private void jump() {
+		if (p1.isTouchWall() && !p1.isGrounded() && p1.isJumpReleased()){ //WallJump
+			p1.setJumpTime(0);
+			Vector wallJump = new Vector(p1.getWallJumpVelocity().getX(),p1.getWallJumpVelocity().getY());
+			if (!p1.isLookleft()){
+				wallJump = wallJump.mul(new Vector(-1,1));
+			}
+			temp = wallJump;
+		}
+		p1.setJumpReleased(false);
+		if(p1.getJumpTime() != 0){	//Regular Jump
+			
+			temp = temp.add(p1.getJumpVelocity());
+			p1.setJumpTime(p1.getJumpTime()-1);
+		}
+	}
+
+	private void minmaxSpeed() {
+		if(temp.getY() > p1.getMaxspeed().getY()){
+			temp.setY(p1.getMaxspeed().getY());
+		}
+		if(temp.getX() > p1.getMaxspeed().getX()){
+			temp.setX(p1.getMaxspeed().getX());
+		}
+		if(temp.getY() < (-1)*p1.getMaxspeed().getY()){
+			temp.setY((-1)*p1.getMaxspeed().getY());
+		}
+		if(temp.getX() < (-1)*p1.getMaxspeed().getX()){
+			temp.setX((-1)*p1.getMaxspeed().getX());
+		}
+		
+		if (Math.abs(temp.getX())<p1.getMinspeed().getX()){
+			temp.setX(0);
+		}
+		if (Math.abs(temp.getY())<p1.getMinspeed().getY()){
+			temp.setY(0);
+		}
+	}
+
+	private void horizontalMovement(){
+		if(this.left ^ this.right){
+			double taccel;
+			if (this.left){
+				if (p1.getMovement().getX()>=0){
+					p1.setMovetime(1);
+				}
+				taccel=p1.getAccel()/(p1.getMovetime()*p1.getRedaccel());
+				p1.setMovetime(p1.getMovetime()+1);
+				taccel=taccel*(-1);
+			} else {
+				if (p1.getMovement().getX()<=0){
+					p1.setMovetime(1);
+				}
+				taccel=p1.getAccel()/(p1.getMovetime()*p1.getRedaccel());
+				p1.setMovetime(p1.getMovetime()+1);
+			}
+			temp=temp.add(new Vector (taccel,0));
+		}
+	}
 
 	private void calcPlayerPos(){
 		p1.setGrounded(false);
 		p1.setTouchWall(false);
-		//Character p1t = new Character(p1.getPosition().add(p1.getMovement()));
 		p1.setPosition(p1.getPosition().add(p1.getMovement()));
 		Entity e = map.checkHitbox(p1);
 		
@@ -235,7 +234,12 @@ public class GameCalculation implements Runnable, InputListener{
 		}
 		
 	}
-	
+	public Map getMap() {
+		return map;
+	}
+	public void setMap(Map map) {
+		this.map = map;
+	}
 	public void stop(){
 		this.flag = false;
 	}
