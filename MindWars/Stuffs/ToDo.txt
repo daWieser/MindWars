@@ -1,2 +1,3 @@
 - Running animation has to be proportional to the X Velocity
 - Running Calculation could use some improvements
+- Gscheide Images für Buttons finden/erstellen

@@ -11,72 +11,26 @@ import Logic.Map;
 import Logic.Vector;
 
 
-public class Menu extends JPanel implements ActionListener, InputListener{
+public class Menu extends JPanel implements InputListener{
 
-	private JButton play;
-	private JButton levelEditor;
-	private JButton settings;
-	private JButton exit;
-	private MindWars mindWars;
-	private MenuListener menuListener;
+	
+	private ActionListener actionListener;
+	
+	private int x, y;
 	
 	
-	public Menu (MenuListener mL){
-		
-		this.menuListener = mL;
+	public Menu (ActionListener aL){
 		
 		this.setLayout(null);
+		this.actionListener = aL;
 		
 		
 		
-		this.play = new JButton("Play");
-		this.play.setBounds(0,0,100,100);
-		this.play.addActionListener(this);
-		this.add(this.play);
-		
-		this.levelEditor= new JButton("Leveleditor");
-		this.levelEditor.setBounds(100,0,100,100);
-		this.levelEditor.addActionListener(this);
-		this.add(this.levelEditor);
-		
-		this.settings = new JButton ("Settings");
-		this.settings.setBounds(200,0,100,100);
-		this.settings.addActionListener(this);
-		this.add(this.settings);
-		
-		this.exit= new JButton("Exit");
-		this.exit.setBounds(300,0,100,100);
-		this.exit.addActionListener(this);
-		this.add(this.exit);
 		
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-		if(arg0.getSource()==this.play)
-		{
-
-			this.menuListener.play();
-			
-			
-			
-		}
-		else if(arg0.getSource()==this.settings)
-		{
-			
-			
-			this.menuListener.leveleditor();
-		
-		}
-		else if(arg0.getSource()==this.exit)
-		{
-			this.menuListener.exit();
-		}
-		
-	}
+	
 	
 	
 
@@ -100,7 +54,6 @@ public class Menu extends JPanel implements ActionListener, InputListener{
 
 	@Override
 	public void key(boolean status, KeyEvent k) {
-		System.out.println("2");
 		
 	}
 
@@ -108,6 +61,15 @@ public class Menu extends JPanel implements ActionListener, InputListener{
 	public void up(boolean status) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void addJButton(JButton button){
+		button.addActionListener(actionListener);
+		button.setOpaque(false);
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.setUI(new MyButtonUI());
+		this.add(button);
 	}
 	
 }

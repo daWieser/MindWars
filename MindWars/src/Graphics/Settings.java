@@ -22,7 +22,7 @@ public class Settings extends JPanel implements ActionListener{
 	
 	private int key_moveLeft=KeyEvent.VK_A;
 	private int key_moveRight= KeyEvent.VK_D;
-	private int key_moveUp= KeyEvent.VK_W;
+	private int key_moveUp= KeyEvent.VK_SPACE;
 	private int key_moveDown= KeyEvent.VK_S;
 	
 	
