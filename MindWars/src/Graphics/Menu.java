@@ -3,6 +3,7 @@ package Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -70,6 +71,16 @@ public class Menu extends JPanel implements InputListener{
 		button.setBorderPainted(false);
 		button.setUI(new MyButtonUI());
 		this.add(button);
+	}
+
+
+
+
+
+	@Override
+	public void mousePressed(Vector me) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

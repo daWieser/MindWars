@@ -74,7 +74,7 @@ public class Vector {
 	 * @return 
 	 * @return new Vector
 	 */
-    public Vector turn(int a)
+    public Vector turn(double a)
     {
         double x=this.x;
         double y= this.y;

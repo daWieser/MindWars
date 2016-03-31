@@ -1,5 +1,7 @@
 package Logic;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -15,12 +17,18 @@ public class Input implements KeyListener,MouseListener, MouseMotionListener{
 	//private boolean left, right, jump, down;
 	
 	private InputListener inputListener;
+	private Vector resolution, resrelation;
 	
 	
 	public Input(Settings settings)
 	{
 		this.settings=settings;
 		this.inputListener = null;
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.resolution = new Vector(dim.getWidth(), dim.getHeight());
+		
+		this.resrelation = new Vector(resolution.getX()/1600,resolution.getY()/900);
 		
 	}
 
@@ -140,7 +148,9 @@ public class Input implements KeyListener,MouseListener, MouseMotionListener{
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		Vector mc = new Vector(arg0.getX(), resolution.getY()-arg0.getY());
+		
+		this.inputListener.mousePressed(mc.div(resrelation));
 		
 		
 		

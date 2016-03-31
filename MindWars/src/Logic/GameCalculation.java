@@ -1,10 +1,12 @@
 package Logic;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import Entity.Character;
 import Entity.Entity;
+import Entity.Projectile;
 import Graphics.InputListener;
 import Graphics.MindWars;
 import Graphics.Settings;
@@ -55,14 +57,8 @@ public class GameCalculation implements Runnable, InputListener{
 		//flag = false;
 		int sec = 0;
 		while (flag){
-			//Gravitation:
-			p1.setMovement(p1.getMovement().add(map.getA_gravitation()));
-			
-			
-			//Trägheit (negative Beschleunigung gegen Null der x-Ebene):
+			//Playermovement:
 			temp = p1.getMovement();
-			if(sec == 0)temp = temp.add(map.getA_gravitation());
-			
 			//horizontal movement
 			horizontalMovement();
 			
@@ -73,7 +69,7 @@ public class GameCalculation implements Runnable, InputListener{
 				
 			}
 			
-			minmaxSpeed();
+			
 			
 			
 			if(this.up && !this.down){
@@ -85,13 +81,35 @@ public class GameCalculation implements Runnable, InputListener{
 			
 			
 			p1.setMovement(temp);
-			calcPlayerPos();
+			//Physix (All Entities):
+			for(int i = 0; i < entities.size(); i++){
+				Entity en = entities.get(i);
+				temp = en.getMovement();
+				
+				//Gravitation:
+				temp = temp.add(map.getA_gravitation().mul(en.getFallVelocity()));
+				//en.setMovement(en.getMovement().add(map.getA_gravitation().mul(en.getFallVelocity())));
+				
+				
+				//Trägheit (negative Beschleunigung gegen Null der x-Ebene):
+				
+				if(sec == 0)temp = temp.add(map.getA_inertia().mul(en.getFallVelocity()));
+				if(en.getType() == 1)minmaxSpeed();
+				en.setMovement(temp);
+				calcPlayerPos(en);
+				
+			}
+			
+			
+			
 			
 			try {
 				Thread.sleep(33);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			cleanEntities();
+			
 			sec++;
 			if(sec == 15) sec = 0;
 		}		
@@ -157,50 +175,74 @@ public class GameCalculation implements Runnable, InputListener{
 		}
 	}
 
-	private void calcPlayerPos(){
-		p1.setGrounded(false);
-		p1.setTouchWall(false);
-		p1.setPosition(p1.getPosition().add(p1.getMovement()));
-		Entity e = map.checkHitbox(p1);
+	private void calcPlayerPos(Entity en){
+		en.setGrounded(false);
+		en.setTouchWall(false);
+		en.setPosition(en.getPosition().add(en.getMovement()));
+		Entity e = map.checkHitbox(en);
 		
-		p1.setPosition(e.getPosition());
-		p1.setTouchWall(e.isTouchWall());
-		p1.setMovement(e.getMovement());
-		p1.setGrounded(e.isGrounded());
+		en.setPosition(e.getPosition());
+		en.setTouchWall(e.isTouchWall());
+		en.setMovement(e.getMovement());
+		en.setGrounded(e.isGrounded());
 		
 		
-		if(p1.getPosition().getX() < 0) {
-			Vector p = p1.getPosition();
+		if(en.getPosition().getX() < 0) {
+			Vector p = en.getPosition();
 			p.setX(0);
-			p1.setPosition(p);
-			p1.hitBox(1);
+			en.setPosition(p);
+			en.hitBox(1);
 		}
 		
-		if(p1.getPosition().getX() > 1600-p1.getDimension().getX()) {
-			Vector p = p1.getPosition();
-			p.setX(1600-p1.getDimension().getX());
-			p1.setPosition(p);
-			p1.hitBox(1);
+		if(en.getPosition().getX() > 1600-en.getDimension().getX()) {
+			Vector p = en.getPosition();
+			p.setX(1600-en.getDimension().getX());
+			en.setPosition(p);
+			en.hitBox(1);
 		}
 		
 		
-		if(p1.getPosition().getY() < 0){
-			Vector p = p1.getPosition();
+		if(en.getPosition().getY() < 0){
+			Vector p = en.getPosition();
 			p.setY(0);
-			p1.setPosition(p);
-			p1.hitBox(2);
+			en.setPosition(p);
+			en.hitBox(2);
 		}
 		
-		if(p1.isGrounded()){
-			p1.setJumpTime(p1.getMaxJumpTime());
-			//if(p1.getJumpTime() > p1.getMaxJumpTime()) p1.setJumpTime(p1.getMaxJumpTime());
+		if(en.isGrounded()){ //v
+			if(en.getType() == 1){
+				p1.setJumpTime(p1.getMaxJumpTime());
+				//if(p1.getJumpTime() > p1.getMaxJumpTime()) p1.setJumpTime(p1.getMaxJumpTime());
+			}
+			else if(en.getType() == 2){
+				
+			}
+			
 		}
 		
-		if(p1.getPosition().getY() > 2000){
-			p1.respawn();
+		if(en.getPosition().getY() > 2000){ //v
+			if(en.getType() == 1){
+				p1.respawn();
+			}
+			else if(en.getType() == 2){
+				en.hitBox(4);
+			}
 		}
 		
 
+	}
+	
+	private void cleanEntities(){
+		for(int i = 0; i < entities.size(); i++){
+			Entity en = entities.get(i);
+			if(en.getType() == 1) {
+				continue;
+			}
+			if(en.getMovement().getX() == 0 && en.getMovement().getY() == 0){
+				entities.remove(i);
+				i--;
+			}
+		}
 	}
 	
 	
@@ -242,5 +284,22 @@ public class GameCalculation implements Runnable, InputListener{
 	}
 	public void stop(){
 		this.flag = false;
+	}
+
+	@Override
+	public void mousePressed(Vector me) {
+		
+		Vector mov = new Vector(100,0);
+		
+		Vector pp = new Vector(p1.getPosition());
+		pp.setY(pp.getY()+p1.getDimension().getY()*0.7);
+		//me.setX(me.getX()*-1);
+		me = me.sub(pp);
+		double angle = Math.atan(me.getY()/me.getX())*180/Math.PI;
+		if(me.getX() < 0) angle += 180;
+		mov = mov.turn(angle);
+		Projectile p = new Projectile(pp, mov.mul(0.2));
+		
+		entities.add(p);
 	}
 }

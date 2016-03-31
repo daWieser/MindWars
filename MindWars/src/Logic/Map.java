@@ -34,6 +34,7 @@ public class Map {
 	public Map (String name){
 		
 		a_gravitation = new Vector (0,-2);
+		a_inertia = new Vector (0,-2);
 		hitbox = new ArrayList<rect>();
 		try {
 			mappic=ImageIO.read (new File("resources/" + name + ".png"));

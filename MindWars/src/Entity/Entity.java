@@ -13,8 +13,18 @@ public abstract class Entity {
 	protected boolean grounded;
 	protected boolean touchWall;
 	
+	protected int type;
 	
 	
+	
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	public boolean isTouchWall() {
 		return touchWall;
 	}
@@ -61,6 +71,7 @@ public abstract class Entity {
 		this.dimension = new Vector(dim);
 		grounded = false;
 		touchWall = false;
+		this.setType(0);
 	}
 	
 	

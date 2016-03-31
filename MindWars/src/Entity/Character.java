@@ -69,6 +69,7 @@ public class Character extends Entity{
 		redaccel=0.75;
 		movetime=1;
 		maxJumpTime=10;
+		this.setType(1);
 	}
 	
 	public Vector getWallJumpVelocity() {

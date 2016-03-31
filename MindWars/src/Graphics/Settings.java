@@ -47,10 +47,10 @@ public class Settings extends JPanel implements ActionListener{
 		this.setLayout(null);
 		this.setSize(500,500);
 		
-		this.ticks = 30;
+		this.ticks = 60;
 		//Times a Frame refreshes in one second
 
-		this.button_FullScreen=new JButton("d");
+		this.button_FullScreen=new JButton("d"); //fost sche
 		this.button_FullScreen.setBounds(200, 200, 100, 100);
 		this.add(this.button_FullScreen);
 		
